@@ -1,0 +1,123 @@
+% !TeX spellcheck = <none>
+\documentclass[]{report}
+\usepackage[utf8]{vietnam}
+\usepackage[table]{xcolor}
+
+% Title Page
+\title{Đặc tả use-case Đặt hàng }
+\author{Bùi Hoàng Tú - 20200547 }
+\date{}
+
+
+\begin{document}
+\maketitle
+
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|}
+		\hline
+		Tác nhân
+		& Khách \\
+		\hline 
+		
+		Mô tả 
+		& Cho phép khách hàng đặt đơn hàng \\
+		\hline 
+		
+		Tiền điều kiện 
+		& Đang ở giao diện xem giỏ hàng \\
+		\hline
+			
+		Luồng sự kiện chính	
+		& 	\begin{tabular}{|c|c|c|} 
+				\firsthline 
+				STT
+				& Thực hiện bởi 
+				& Hành động \\
+				\hline 
+				
+				1. 
+				& Người dùng 
+				& Ấn nút đặt hàng \\
+				\hline
+				
+				2.
+				& Hệ thống 
+				& Lấy thông tin người dùng từ bộ nhớ hoặc tài khoản \\
+				\hline
+				
+				3.
+				& Hệ thống 
+				& Kiểm tra hàng tồn kho \\
+				\hline
+				
+				4. 
+				& Khách hàng 
+				& Cập nhật  thông tin giao hàng \\	
+				\hline
+				
+				5.
+				& Hệ thống 
+				& Kiểm tra thông tin \\
+				\hline 
+				
+				6. 
+				& Hệ thống 
+				& Tính phí giao hàng, hiển thị, lưu lại thông tin đơn \\
+				\hline
+				
+				7.
+				& Khách hàng 
+				& Chọn phương thức thanh toán \\
+				\hline
+				
+				8.
+				& Khách hàng
+				& Cung cấp thông tin thẻ \\
+				\hline 
+				
+				9.
+				& Hệ thống 
+				& Hiển thị và ghi lại thông tin giao dịch,  \\
+				\hline
+				
+			\end{tabular} \\
+			[15ex]
+		\hline
+		
+		Luồng thay thế 
+		&	\begin{tabular}{|c|c|c|}
+				\firsthline
+				STT
+				& Thực hiện bởi 
+				& Hành động \\
+				\hline 
+			
+				3a.
+				& Hệ thống 
+				& Yêu cầu người dùng nhập lại giỏ hàng \\
+				\hline 
+				& Người dùng 
+				& Cập nhật giỏ hàng \\
+				\hline
+				& Người dùng 
+				& Ấn nút đặt hàng \\
+				\hline 
+				\hline
+				
+				5a.
+				& Hệ thống 
+				& Thông báo có trường bỏ trống và yêu cầu nhập \\
+				\hline
+			\end{tabular} \\
+			[15ex]
+		\hline
+		
+		Hậu điều kiện 
+		& Không 
+		\\ \hline
+		
+	\end{tabular}
+\end{table}
+
+\end{document}          
