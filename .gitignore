@@ -5,3 +5,9 @@
 *.bak
 *.rar
 *.zip 
+
+# docx lock files 
+*~$e*
+
+
+*.tmp
