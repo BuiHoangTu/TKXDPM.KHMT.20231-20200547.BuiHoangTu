@@ -6,8 +6,4 @@ public class PlaceOrderService implements IPlaceOrderService {
         return false;
     }
 
-    @Override
-    public boolean validateAddress(String address) {
-        return false;
-    }
 }

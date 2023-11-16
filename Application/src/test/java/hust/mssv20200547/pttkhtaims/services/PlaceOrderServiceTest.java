@@ -22,9 +22,5 @@ class PlaceOrderServiceTest {
         assertEquals(expectedRes, res);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/validate-address.csv"})
-    void validateAddress(String address, boolean expectedRes) {
 
-    }
 }

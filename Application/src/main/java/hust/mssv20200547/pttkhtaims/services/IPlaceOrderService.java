@@ -9,10 +9,4 @@ public interface IPlaceOrderService {
      */
     boolean validatePhoneNumber(String phoneNumber);
 
-    /**
-     *
-     * @param address
-     * @return
-     */
-    boolean validateAddress(String address);
 }
