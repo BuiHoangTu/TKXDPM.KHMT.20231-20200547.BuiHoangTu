@@ -21,12 +21,11 @@ ext {
 sourceCompatibility = '17'
 targetCompatibility = '17'
 
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
 }
 
 application {
-    mainModule = 'hust.mssv.pttkhtaims'
     mainClass = 'hust.mssv20200547.pttkhtaims.AIMS'
 }
 
