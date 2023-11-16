@@ -1,6 +1,7 @@
-module hust.mssv20200547.pttkhtaims {
+module hust.mssv.pttkhtaims {
     requires javafx.controls;
     requires javafx.fxml;
+    requires lombok;
 
 
     opens hust.mssv20200547.pttkhtaims to javafx.fxml;
