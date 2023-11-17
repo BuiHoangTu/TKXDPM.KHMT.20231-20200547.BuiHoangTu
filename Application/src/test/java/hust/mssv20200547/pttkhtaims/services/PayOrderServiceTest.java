@@ -5,7 +5,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class PayOrderServiceTest {
     private IPayOrderService payOrderService;
@@ -15,22 +14,32 @@ class PayOrderServiceTest {
         this.payOrderService = new PayOrderService();
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/validate-card.csv"})
-    void validateCardInfo(
-            String cardHolderName,
-            String cardNumber,
-            String expirationDate,
-            String securityCode,
-            boolean expectedIsSuccess,
-            String expectedErrorMessage) {
 
-        try {
-            boolean isSuccess = payOrderService.validateCardInfo(cardHolderName, cardNumber, expirationDate, securityCode);
-            assertEquals(expectedIsSuccess, isSuccess);
-        } catch (Exception e) {
-            assertFalse(expectedIsSuccess);
-            assertEquals(expectedErrorMessage, e.getMessage());
-        }
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-cardholder-name.csv"})
+    void validateCardHolderName(String name, boolean expected) {
+        var actual = payOrderService.validateCardHolderName(name);
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-card-number.csv"})
+    void validateCardNumber(String number, boolean expected) {
+        var actual = payOrderService.validateCardNumber(number);
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-expiration-date.csv"})
+    void validateCardExpirationDate(String expirationCode, boolean expected) {
+        var actual = payOrderService.validateCardNumber(expirationCode);
+        assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-security-code.csv"})
+    void validateCardSecurityCode(String securityCode, boolean expected) {
+        var actual = payOrderService.validateCardNumber(securityCode);
+        assertEquals(expected, actual);
     }
 }

@@ -15,7 +15,7 @@ class PlaceOrderServiceTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/validate-phone.csv"})
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PlaceOrderServiceTest/validate-phone.csv"})
     void validatePhoneNumber(String phoneNumber, boolean expectedRes) {
         var res = this.placeOrderService.validatePhoneNumber(phoneNumber);
         assertEquals(expectedRes, res);

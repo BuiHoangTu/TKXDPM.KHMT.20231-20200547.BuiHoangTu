@@ -88,7 +88,7 @@ hàng lại.
 Tiếp theo, phần mềm sẽ yêu cầu khách hàng thiết lập thông tin giao hàng (delivery info). Trong 
 quá trình nhập thông tin giao hàng, khách hàng vẫn nhìn thấy các sản phẩm và thông tin như
 trong giỏ hàng. Mỗi khi khách hàng nhập hoặc cập nhật địa chỉ giao hàng xong, phần mềm sẽ tính 
-(lại) vphí giao hàng, tổng tiền hàng bao gồm phí giao hàng. Lúc này, phần mềm sẽ hiển thị và lưu 
+(lại) phí giao hàng, tổng tiền hàng bao gồm phí giao hàng. Lúc này, phần mềm sẽ hiển thị và lưu 
 lại thông tin hoá đơn tạm thời (invoice), gồm có danh sách sản phẩm trong giỏ hàng, số lượng, 
 giá cả sản phẩm, tổng giá cả sản phẩm chưa bao gồm VAT, tổng giá cả sản phẩm đã bao gồm VAT, 
 phí giao hàng, và tổng số tiền phải trả. Tổng số tiền khách hàng phải trả bao gồm tổng giá cả sản 
