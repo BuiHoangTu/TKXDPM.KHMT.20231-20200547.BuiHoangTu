@@ -16,28 +16,28 @@ class PayOrderServiceTest {
 
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-cardholder-name.csv"})
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-cardholder-name.csv"})
     void validateCardHolderName(String name, boolean expected) {
         var actual = payOrderService.validateCardHolderName(name);
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-card-number.csv"})
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-card-number.csv"})
     void validateCardNumber(String number, boolean expected) {
         var actual = payOrderService.validateCardNumber(number);
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-expiration-date.csv"})
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-expiration-date.csv"})
     void validateCardExpirationDate(String expirationCode, boolean expected) {
         var actual = payOrderService.validateCardNumber(expirationCode);
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/PayOrderServiceTest/validate-security-code.csv"})
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-security-code.csv"})
     void validateCardSecurityCode(String securityCode, boolean expected) {
         var actual = payOrderService.validateCardNumber(securityCode);
         assertEquals(expected, actual);
