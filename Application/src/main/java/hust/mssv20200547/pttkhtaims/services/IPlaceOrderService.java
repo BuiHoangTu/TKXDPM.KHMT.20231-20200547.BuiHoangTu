@@ -25,4 +25,6 @@ public interface IPlaceOrderService {
      */
     Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart);
 
+    boolean validateName(String name);
+
 }

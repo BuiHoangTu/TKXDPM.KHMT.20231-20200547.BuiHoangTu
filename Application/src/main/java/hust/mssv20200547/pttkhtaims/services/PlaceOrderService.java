@@ -18,4 +18,9 @@ public class PlaceOrderService implements IPlaceOrderService {
         return Collections.emptyMap();
     }
 
+    @Override
+    public boolean validateName(String name){
+        return false;
+    }
+
 }

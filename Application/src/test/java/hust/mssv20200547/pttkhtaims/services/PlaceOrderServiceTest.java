@@ -60,4 +60,12 @@ class PlaceOrderServiceTest {
         var res = this.placeOrderService.validateProductQuantity(this.database, cart);
         assertEquals(expected, res.keySet().stream().toList());
     }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/place-order-service-test/validate-name.csv"})
+    void validateName(String name, boolean expected) {
+        var actual = this.placeOrderService.validateName(name);
+        assertEquals(expected, actual);
+    }
+
 }
