@@ -4,10 +4,9 @@ import hust.mssv20200547.pttkhtaims.models.Media;
 import jakarta.json.Json;
 import jakarta.json.JsonReader;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 public class DatabaseImp implements IDatabase{
@@ -29,9 +28,14 @@ public class DatabaseImp implements IDatabase{
     }
 
     @Override
-    public Map<Media, Long> get(List<Media> medias) {
-        return medias.stream().collect(Collectors.toMap(key ->
-            key, data::get
-        ));
+    public Map<Media, Long> get(Collection<Media> medias) {
+        Map<Media, Long> res = new HashMap<>();
+
+        medias.forEach((media -> {
+            Long quantity = data.get(media);
+            res.put(media, quantity);
+        }));
+
+        return res;
     }
 }
