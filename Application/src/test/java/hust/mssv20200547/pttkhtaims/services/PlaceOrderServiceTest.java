@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,7 +59,7 @@ class PlaceOrderServiceTest {
         }
 
         var res = this.placeOrderService.validateProductQuantity(this.database, cart);
-        assertEquals(expected, res.keySet().stream().toList());
+        assertEquals(new HashSet<>(expected), res.keySet());
     }
 
     @ParameterizedTest
