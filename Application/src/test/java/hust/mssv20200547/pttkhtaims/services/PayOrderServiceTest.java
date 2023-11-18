@@ -32,14 +32,14 @@ class PayOrderServiceTest {
     @ParameterizedTest
     @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-expiration-date.csv"})
     void validateCardExpirationDate(String expirationCode, boolean expected) {
-        var actual = payOrderService.validateCardNumber(expirationCode);
+        var actual = payOrderService.validateCardExpirationDate(expirationCode);
         assertEquals(expected, actual);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/pay-order-service-test/validate-security-code.csv"})
     void validateCardSecurityCode(String securityCode, boolean expected) {
-        var actual = payOrderService.validateCardNumber(securityCode);
+        var actual = payOrderService.validateCardSecurityCode(securityCode);
         assertEquals(expected, actual);
     }
 }

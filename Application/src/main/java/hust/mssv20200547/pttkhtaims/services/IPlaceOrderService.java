@@ -5,6 +5,7 @@ import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.models.Media;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IPlaceOrderService {
     /**
@@ -15,6 +16,13 @@ public interface IPlaceOrderService {
      */
     boolean validatePhoneNumber(String phoneNumber);
 
-    List<Media> validateProductQuantity(IDatabase database, Cart cart);
+    /**
+     * Check if the quantity of products in the database is sufficient
+     * for those in the cart
+     * @param database contains all products in store
+     * @param cart contains all products customer is going to purchase
+     * @return map of items that are not sufficient with the maximum
+     */
+    Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart);
 
 }

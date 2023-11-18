@@ -5,7 +5,7 @@ import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.models.Media;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 public class PlaceOrderService implements IPlaceOrderService {
     @Override
@@ -14,8 +14,8 @@ public class PlaceOrderService implements IPlaceOrderService {
     }
 
     @Override
-    public List<Media> validateProductQuantity(IDatabase database, Cart cart) {
-        return Collections.emptyList();
+    public Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) {
+        return Collections.emptyMap();
     }
 
 }

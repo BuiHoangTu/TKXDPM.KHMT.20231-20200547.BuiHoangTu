@@ -58,6 +58,6 @@ class PlaceOrderServiceTest {
         }
 
         var res = this.placeOrderService.validateProductQuantity(this.database, cart);
-        assertEquals(expected, res);
+        assertEquals(expected, res.keySet().stream().toList());
     }
 }
