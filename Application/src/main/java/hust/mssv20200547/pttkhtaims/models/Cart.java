@@ -1,68 +1,70 @@
 package hust.mssv20200547.pttkhtaims.models;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class Cart implements Map< Media, Long> {
+    private final Map< Media, Long> content = new HashMap<>();
 
     @Override
     public int size() {
-        return 0;
+        return content.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return content.isEmpty();
     }
 
     @Override
     public boolean containsKey(Object key) {
-        return false;
+        return content.containsKey(key);
     }
 
     @Override
     public boolean containsValue(Object value) {
-        return false;
+        return content.containsValue(value);
     }
 
     @Override
     public Long get(Object key) {
-        return null;
+        return content.get(key);
     }
 
     @Override
     public Long put(Media key, Long value) {
-        return null;
+        return content.put(key, value);
     }
 
     @Override
     public Long remove(Object key) {
-        return null;
+        return content.remove(key);
     }
 
     @Override
     public void putAll(Map<? extends Media, ? extends Long> m) {
-
+        content.putAll(m);
     }
 
     @Override
     public void clear() {
-
+        content.clear();
     }
 
     @Override
     public Set<Media> keySet() {
-        return null;
+        return content.keySet();
     }
 
     @Override
     public Collection<Long> values() {
-        return null;
+        return content.values();
     }
 
     @Override
     public Set<Entry<Media, Long>> entrySet() {
-        return null;
+        return content.entrySet();
     }
 }
