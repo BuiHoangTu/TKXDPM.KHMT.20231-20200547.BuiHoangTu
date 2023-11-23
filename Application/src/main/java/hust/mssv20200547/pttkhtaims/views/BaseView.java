@@ -1,4 +1,4 @@
-package hust.mssv20200547.pttkhtaims.scenes;
+package hust.mssv20200547.pttkhtaims.views;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +9,7 @@ import lombok.NonNull;
 import java.io.IOException;
 import java.net.URL;
 
-public abstract class BaseScene {
+public abstract class BaseView {
     private final Scene scene;
 
     /**
@@ -17,7 +17,7 @@ public abstract class BaseScene {
      * @throws IOException if getSceneURL return null
      * @throws NullPointerException if cant find fxml file
      */
-    public BaseScene() throws IOException {
+    public BaseView() throws IOException {
         Parent root = FXMLLoader.load(this.getSceneURL());
         this.scene = new Scene(root);
     }

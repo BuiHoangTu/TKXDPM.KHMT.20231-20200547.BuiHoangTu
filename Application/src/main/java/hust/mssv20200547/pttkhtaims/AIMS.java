@@ -1,6 +1,6 @@
 package hust.mssv20200547.pttkhtaims;
 
-import hust.mssv20200547.pttkhtaims.scenes.HomeScene;
+import hust.mssv20200547.pttkhtaims.views.HomeView;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -34,7 +34,7 @@ public class AIMS extends Application {
         fadeAppear.setOnFinished((event) -> fadeDisappear.play());
 
         // home
-        var home = new HomeScene();
+        var home = new HomeView();
         fadeAppear.setOnFinished((event -> home.apply(primaryStage)));
 
         // app run
