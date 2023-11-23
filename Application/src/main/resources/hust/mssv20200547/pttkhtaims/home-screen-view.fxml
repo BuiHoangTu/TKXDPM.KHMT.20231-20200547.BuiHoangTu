@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="788.0" prefWidth="1326.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="788.0" prefWidth="1326.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hust.mssv20200547.pttkhtaims.controllers.HomeController">
    <children>
       <HBox prefHeight="104.0" prefWidth="1326.0" style="-fx-background-color: #ccebff; -fx-border-color: #33adff;">
          <children>
@@ -72,11 +72,11 @@
             </VBox>
          </children>
       </HBox>
-      <HBox fx:id="hboxMedia" layoutX="24.0" layoutY="123.0" prefHeight="629.0" prefWidth="1283.0">
+      <HBox fx:id="hBoxMedia" layoutX="24.0" layoutY="123.0" prefHeight="629.0" prefWidth="1283.0">
          <children>
-            <VBox fx:id="vboxMedia1" prefHeight="629.0" prefWidth="321.0" style="-fx-border-color: #33adff;" />
-            <VBox fx:id="vboxMedia2" prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
-            <VBox fx:id="vboxMedia3" prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
+            <VBox fx:id="vBoxMedia1" prefHeight="629.0" prefWidth="321.0" style="-fx-border-color: #33adff;" />
+            <VBox fx:id="vBoxMedia2" prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
+            <VBox fx:id="vBoxMedia3" prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
             <VBox prefHeight="629.0" prefWidth="320.0" style="-fx-border-color: #33adff;" />
          </children>
       </HBox>
