@@ -9,6 +9,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class Media {
+    private String id;
     private String title;
     private long value;
     private long price;
