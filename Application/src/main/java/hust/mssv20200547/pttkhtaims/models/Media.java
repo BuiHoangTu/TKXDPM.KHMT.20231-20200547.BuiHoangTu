@@ -1,16 +1,16 @@
 package hust.mssv20200547.pttkhtaims.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Media {
+public abstract class Media {
     private String title;
+    private long value;
     private long price;
 
     @Override

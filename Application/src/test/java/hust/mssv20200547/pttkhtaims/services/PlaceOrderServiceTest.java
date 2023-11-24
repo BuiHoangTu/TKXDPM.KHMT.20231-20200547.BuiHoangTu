@@ -44,7 +44,7 @@ class PlaceOrderServiceTest {
             var title = item.asJsonObject().getString("title");
             var quantity = item.asJsonObject().getInt("quantity");
 
-            var media = new Media();
+            var media = new Media(){};
             media.setTitle(title);
             cart.put(media, (long) quantity);
         }
@@ -53,7 +53,7 @@ class PlaceOrderServiceTest {
         List<Media> expected = new ArrayList<>();
         for (var item: expectedJson) {
             String title = item.asJsonObject().getString("title");
-            var m = new Media();
+            var m = new Media(){};
             m.setTitle(title);
             expected.add(m);
         }

@@ -20,7 +20,7 @@ public class DatabaseImp implements IDatabase{
                 var title = item.asJsonObject().getString("title");
                 var quantity = item.asJsonObject().getInt("quantity");
 
-                var media = new Media();
+                var media = new Media(){};
                 media.setTitle(title);
                 this.data.put(media, (long) quantity);
             }
