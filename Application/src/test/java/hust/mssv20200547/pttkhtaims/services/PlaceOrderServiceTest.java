@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -37,7 +38,7 @@ class PlaceOrderServiceTest {
 
     @ParameterizedTest
     @JsonFileSource(resources = {"/hust/mssv20200547/pttkhtaims/services/place-order-service-test/validate-product-quantity.json"})
-    void validateProductQuantity(JsonObject test) {
+    void validateProductQuantity(JsonObject test) throws SQLException {
         Cart cart = new Cart();
         JsonArray cartJson = test.getJsonArray("cart");
         for (var item: cartJson.asJsonArray()) {

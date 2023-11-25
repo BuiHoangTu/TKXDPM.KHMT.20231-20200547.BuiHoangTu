@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 
 public class HomeView extends BaseView {
-    private static final String URI = "/hust/mssv20200547/pttkhtaims/home-screen-view.fxml";
+    private static final URL URI = HomeView.class.getResource("/hust/mssv20200547/pttkhtaims/home-screen-view.fxml");
 
     /**
      * Constructor
@@ -18,6 +18,6 @@ public class HomeView extends BaseView {
 
     @Override
     protected URL getSceneURL() {
-        return HomeView.class.getResource(URI);
+        return URI;
     }
 }

@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@AllArgsConstructor
 @Getter
 @Setter
 public class DigitalVideoDisc extends Media {
@@ -20,4 +19,27 @@ public class DigitalVideoDisc extends Media {
     private String subtitles;
     private String genre;
 
+    public DigitalVideoDisc(
+            Long id,
+            String title,
+            long value,
+            long price,
+            String director,
+            LocalTime runtime,
+            String studio,
+            LocalDate publicationDate,
+            String discFormat,
+            String language,
+            String subtitles,
+            String genre) {
+        super(id, title, value, price);
+        this.director = director;
+        this.runtime = runtime;
+        this.studio = studio;
+        this.publicationDate = publicationDate;
+        this.discFormat = discFormat;
+        this.language = language;
+        this.subtitles = subtitles;
+        this.genre = genre;
+    }
 }

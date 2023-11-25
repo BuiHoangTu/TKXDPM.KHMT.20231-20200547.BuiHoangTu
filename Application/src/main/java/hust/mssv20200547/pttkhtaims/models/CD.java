@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
 @Getter
 @Setter
 public class CD extends Media{
@@ -17,4 +16,21 @@ public class CD extends Media{
     private String genre;
     private LocalDate publicationDate;
 
+    public CD(
+            Long id,
+            String title,
+            long value,
+            long price,
+            List<String> trackList,
+            String recordLabel,
+            String artist,
+            String genre,
+            LocalDate publicationDate) {
+        super(id, title, value, price);
+        this.trackList = trackList;
+        this.recordLabel = recordLabel;
+        this.artist = artist;
+        this.genre = genre;
+        this.publicationDate = publicationDate;
+    }
 }

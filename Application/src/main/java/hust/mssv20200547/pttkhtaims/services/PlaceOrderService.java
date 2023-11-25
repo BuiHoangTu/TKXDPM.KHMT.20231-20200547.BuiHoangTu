@@ -4,6 +4,7 @@ import hust.mssv20200547.pttkhtaims.database.IDatabase;
 import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.models.Media;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class PlaceOrderService implements IPlaceOrderService {
     }
 
     @Override
-    public Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) {
+    public Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) throws SQLException {
         Map<Media, Long> infeasibleProducts = new HashMap<>();
 
         Map<Media, Long> inDBMedias = database.get(cart.keySet());

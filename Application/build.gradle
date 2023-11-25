@@ -43,6 +43,9 @@ dependencies {
     testImplementation 'net.joshka:junit-json-params:5.9.3-r0'
     testImplementation 'org.eclipse.parsson:parsson:1.1.1'
 
+    // mysql jdbc
+    implementation 'mysql:mysql-connector-java:8.0.28'
+
 }
 
 test {
