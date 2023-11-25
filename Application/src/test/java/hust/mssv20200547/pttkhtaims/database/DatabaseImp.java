@@ -4,6 +4,7 @@ import hust.mssv20200547.pttkhtaims.models.Media;
 import jakarta.json.Json;
 import jakarta.json.JsonReader;
 
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,5 +38,10 @@ public class DatabaseImp implements IDatabase{
         }));
 
         return res;
+    }
+
+    @Override
+    public <M extends Media> M getMedia(M media) throws SQLException {
+        return null;
     }
 }

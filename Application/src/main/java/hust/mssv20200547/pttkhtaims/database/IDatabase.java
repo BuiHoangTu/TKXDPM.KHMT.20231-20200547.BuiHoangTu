@@ -9,4 +9,6 @@ import java.util.Map;
 
 public interface IDatabase {
     Map<Media, Long> get(Collection<Media> medias) throws SQLException;
+
+    <M extends Media> M getMedia(M media) throws SQLException;
 }
