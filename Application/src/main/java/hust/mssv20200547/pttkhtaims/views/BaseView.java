@@ -1,16 +1,21 @@
 package hust.mssv20200547.pttkhtaims.views;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import lombok.Getter;
 import lombok.NonNull;
 
 import java.io.IOException;
 import java.net.URL;
 
 public abstract class BaseView {
-    private final Scene scene;
+    protected final Scene scene;
+    @Getter
+    protected final Parent root;
+    protected final FXMLLoader loader;
 
     /**
      * prepare a new scene
@@ -18,7 +23,8 @@ public abstract class BaseView {
      * @throws NullPointerException if cant find fxml file
      */
     public BaseView() throws IOException {
-        Parent root = FXMLLoader.load(this.getSceneURL());
+        this.loader = new FXMLLoader(this.getSceneURL());
+        this.root = loader.load();
         this.scene = new Scene(root);
     }
 
@@ -41,4 +47,9 @@ public abstract class BaseView {
             stage.setIconified(true);
         }
     }
+
+    public <T> T getController() {
+        return this.loader.getController();
+    }
+
 }
