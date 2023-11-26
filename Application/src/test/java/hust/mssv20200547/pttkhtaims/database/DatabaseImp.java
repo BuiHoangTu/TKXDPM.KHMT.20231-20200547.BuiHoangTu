@@ -41,7 +41,12 @@ public class DatabaseImp implements IDatabase{
     }
 
     @Override
-    public <M extends Media> M getMedia(M media) throws SQLException {
+    public <M extends Media> M getMediaDetail(M media) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public Map<Media, Long> searchMedias(String searchType, String searchValue, int quantity) throws SQLException {
         return null;
     }
 }

@@ -60,7 +60,7 @@ public class MySqlAims implements IDatabase{
     }
 
     @Override
-    public <M extends Media> M getMedia(M media) throws SQLException {
+    public <M extends Media> M getMediaDetail(M media) throws SQLException {
         accessDB((mysql -> {
             if (media instanceof Book book) {
                 var preparedStatement = mysql.prepareStatement(
@@ -148,13 +148,62 @@ public class MySqlAims implements IDatabase{
         return media;
     }
 
+    @Override
+    public Map<Media, Long> searchMedias(String searchType, String searchValue, int resQuantity) throws SQLException {
+        return this.accessDB((mysql) -> {
+            var preparedStatement = mysql.prepareStatement(
+                    "Select id, title, category, value, price, quantity " +
+                            "From media " +
+                            "Where ? like ? " +
+                            "Limit ?"
+            );
+            preparedStatement.setString(1, searchType);
+            preparedStatement.setString(2, "%" + searchValue + "%");
+            preparedStatement.setInt(3, resQuantity);
+
+            Map<Media, Long> localRes = new HashMap<>();
+            var rsIte = new ResultSetColIterator(preparedStatement.executeQuery());
+            while (rsIte.next()) {
+                long id = rsIte.getLong();
+                String title = rsIte.getString();
+                String category = rsIte.getString();
+                long value = rsIte.getLong();
+                long price = rsIte.getLong();
+                long quantity = rsIte.getLong();
+
+                switch (category.toLowerCase(Locale.ROOT)) {
+                    case "book" -> localRes.put(
+                            new Book(id, title, price, value, null, null, null, null, null, null, 0),
+                            quantity
+                    );
+                    case "cd" -> localRes.put(
+                            new CD(id, title, price, value, null, null, null, null, null),
+                            quantity
+                    );
+                    case "digital_video_disc" -> localRes.put(
+                            new DigitalVideoDisc(id, title, price, value, null, null, null, null, null, null, null, null),
+                            quantity
+                    );
+                    case "long_play_record" -> localRes.put(
+                            new LongPlayRecord(id, title, price, value, null, null, null, null, null, null, null, null),
+                            quantity
+                    );
+                    default -> localRes.put(new Media(id, title, price, value) {}, quantity);
+                }
+            }
+
+            return localRes;
+        });
+    }
+
     private <T> T accessDB(SqlAction<Connection, T> action) throws SQLException {
-        try (var mysql = DriverManager.getConnection("jdbc:mysql://localhost:3306/personalaims", "root", "")) {
+        try (var mysql = DriverManager.getConnection("jdbc:mysql://localhost:3306/personalaims", "personal_aims", "personal_aims")) {
             return action.call(mysql);
         }
     }
     
-    
+
+    @SuppressWarnings("all")
     private static class ResultSetColIterator {
         private final ResultSet rs;
         private int colIndex = 1;
