@@ -27,6 +27,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 application {
+//    mainClass = "hust.mssv20200547.pttkhtaims.Setup"
     mainClass = 'hust.mssv20200547.pttkhtaims.AIMS'
 }
 
