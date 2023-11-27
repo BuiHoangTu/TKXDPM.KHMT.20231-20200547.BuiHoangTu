@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.util.*;
 
 public class MySqlAims implements IDatabase{
+    private static final org.slf4j.Logger LOGGER_MY_SQL_AIMS = org.slf4j.LoggerFactory.getLogger(MySqlAims.class);
     @Override
     public Map<Media, Long> get(Collection<Media> medias) throws SQLException {
         List<Long> ids = medias.stream().map(Media::getId).toList();
@@ -150,6 +151,8 @@ public class MySqlAims implements IDatabase{
 
     @Override
     public Map<Media, Long> searchMedias(String searchType, String searchValue, int resQuantity) throws SQLException {
+        LOGGER_MY_SQL_AIMS.info("Search {}: {}", searchType, searchValue );
+
         return this.accessDB((mysql) -> {
             var preparedStatement = mysql.prepareStatement(
                     "Select id, title, category, value, price, quantity " +

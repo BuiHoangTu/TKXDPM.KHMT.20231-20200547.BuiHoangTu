@@ -1,5 +1,6 @@
 package hust.mssv20200547.pttkhtaims;
 
+import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.views.HomeView;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -12,6 +13,8 @@ import javafx.util.Duration;
 import java.util.Objects;
 
 public class AIMS extends Application {
+    public static final Cart cart = new Cart();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setMaximized(true);

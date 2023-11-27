@@ -1,23 +1,27 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
+import hust.mssv20200547.pttkhtaims.database.IDatabase;
+import hust.mssv20200547.pttkhtaims.database.MySqlAims;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import hust.mssv20200547.pttkhtaims.views.MediaInHomeView;
+import javafx.event.ActionEvent;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.SplitMenuButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
+    private static final IDatabase MYSQL = new MySqlAims();
+
     @FXML
     private RadioMenuItem radioMenuItemTitle;
     @FXML
@@ -42,11 +46,17 @@ public class HomeController implements Initializable {
     private VBox vBoxMedia3;
     @FXML
     private VBox vBoxMedia4;
+    @FXML
+    private TextField textFieldSearch;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        this.numMediaInCart.setText(String.valueOf(0));
 
+        this.cartImage.addEventHandler(EventType.ROOT, event -> {
+
+        });
     }
 
     public void setMedias(Map<Media, Long> medias) throws IOException {
@@ -59,6 +69,19 @@ public class HomeController implements Initializable {
             MediaInHomeController mediaController = mediaView.getController();
             mediaController.setMedia(mediaEntry);
             vBoxes.next().getChildren().add(mediaView.getRoot());
+        }
+    }
+
+    @FXML
+    private void searchMedias(ActionEvent ignoredEvent) throws SQLException, IOException {
+        var selected = this.searchType.getSelectedToggle();
+
+        if (selected == this.radioMenuItemTitle) {
+            this.setMedias(MYSQL.searchMedias("title", this.textFieldSearch.getText(), 20));
+        }
+
+        if (selected == this.radioMenuItemCategory) {
+            this.setMedias(MYSQL.searchMedias("category", this.textFieldSearch.getText(), 20));
         }
     }
 

@@ -1,5 +1,6 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
+import hust.mssv20200547.pttkhtaims.AIMS;
 import hust.mssv20200547.pttkhtaims.models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,13 +11,13 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.SVGPath;
 
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MediaInHomeController implements Initializable {
+    private Media m;
     @FXML
     private ImageView imageView;
     @FXML
@@ -39,7 +40,7 @@ public class MediaInHomeController implements Initializable {
     }
 
     public void setMedia(Map.Entry<Media, Long> mediaEntry) {
-        Media m = mediaEntry.getKey();
+        this.m = mediaEntry.getKey();
         this.labelTitle.setText(m.getTitle());
         this.labelPrice.setText(String.valueOf(m.getPrice()));
         this.labelStoreQuantity.setText(String.valueOf(mediaEntry.getValue()));
@@ -60,11 +61,12 @@ public class MediaInHomeController implements Initializable {
 
     @FXML
     private void addToCart(ActionEvent actionEvent) {
-        int quantityLeft = Integer.parseInt(this.labelStoreQuantity.getText()) - this.spinnerBuyingQuantity.getValue();
+        int quantityBuy = this.spinnerBuyingQuantity.getValue();
+        int quantityLeft = Integer.parseInt(this.labelStoreQuantity.getText()) - quantityBuy;
         this.labelStoreQuantity.setText(String.valueOf(quantityLeft));
         this.spinnerValueFactory.setMax(quantityLeft);
         this.spinnerValueFactory.setValue(0);
 
-        // TODO: cart
+        AIMS.cart.put(m, (long) quantityBuy);
     }
 }
