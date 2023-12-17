@@ -3,20 +3,24 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
-import java.util.regex.Pattern;
 
 public class VnPayConfig {
-    private static final Pattern pattern = Pattern.compile("\\{\"IP\":\"(?<ip>.*)\"\\}");
-    public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_ReturnUrl = "https://sandbox.vnpayment.vn/tryitnow/Home/VnPayReturn";
-    public static String vnp_TmnCode = "TXOOZNX4";
-    public static String secretKey = "HUQHTRVXVRGJJWHMBFCAUBAXOSAJBIND";
-    public static String vnp_ApiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
+    public static final String LANGUAGE = "vn";
+    public static final String CURRENCY = "VND";
+    public static final String VERSION = "2.1.0";
+    public static final String PAY_COMMAND = "pay";
+    public static final String ORDER_TYPE = "other";
+    public static final String PAY_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
+    public static final String RETURN_URL = "https://sandbox.vnpayment.vn/tryitnow/Home/VnPayReturn";
+    public static final String TMN_CODE = "TXOOZNX4";
+    public static final String SECRET_KEY = "HUQHTRVXVRGJJWHMBFCAUBAXOSAJBIND";
+    public static final String API_URL = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
+    public static final String TIME_FORMAT = "yyyyMMddHHmmss";
+    public static final String TIME_SECTOR = "Etc/GMT+7";
 
     public static String md5(String message) {
         String digest = null;
@@ -68,7 +72,7 @@ public class VnPayConfig {
                 sb.append("&");
             }
         }
-        return hmacSHA512(secretKey, sb.toString());
+        return hmacSHA512(SECRET_KEY, sb.toString());
     }
 
     public static String hmacSHA512(final String key, final String data) {
@@ -92,20 +96,6 @@ public class VnPayConfig {
         } catch (Exception ex) {
             return "";
         }
-    }
-
-    public static String getIpAddress() throws IOException {
-//        URL url = new URL("http://www.realip.info/api/p/realip.php");
-//        try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()))) {
-//            String content = String.join("\n", in.lines().collect(Collectors.toList()));
-//            Matcher matcher = pattern.matcher(content);
-//            if (matcher.matches()) {
-//                return matcher.group("ip");
-//            } else {
-//                return "No ip found";
-//            }
-//        }
-        return "127.0.0.1:50387";
     }
 
     public static String getRandomNumber(int len) {
