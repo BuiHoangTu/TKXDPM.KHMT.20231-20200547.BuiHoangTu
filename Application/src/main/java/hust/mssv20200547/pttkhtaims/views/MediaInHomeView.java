@@ -1,10 +1,12 @@
 package hust.mssv20200547.pttkhtaims.views;
 
+import hust.mssv20200547.pttkhtaims.controllers.MediaInHomeController;
+
 import java.io.IOException;
 import java.net.URL;
 
 public class MediaInHomeView extends BaseView{
-    private static final URL PATH = MediaInHomeView.class.getResource("/hust/mssv20200547/pttkhtaims/media-in-home.fxml");
+    private static final URL PATH = MediaInHomeView.class.getResource("/fxml/media-in-home.fxml");
 
     /**
      * prepare a new scene
@@ -13,11 +15,11 @@ public class MediaInHomeView extends BaseView{
      * @throws NullPointerException if cant find fxml file
      */
     public MediaInHomeView() throws IOException {
-        super();
+        super(PATH);
     }
 
     @Override
-    protected URL getSceneURL() throws NullPointerException {
-        return PATH;
+    public MediaInHomeController getController() {
+        return (MediaInHomeController) super.getController();
     }
 }

@@ -14,7 +14,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="600.0">
          <children>
-            <Label fx:id="labelTitle" prefHeight="17.0" styleClass="h2" stylesheets="@../../../style/common.css" text="Title" />
+            <Label fx:id="labelTitle" prefHeight="17.0" styleClass="h2" stylesheets="@../style/common.css" text="Title" />
             <HBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="340.0">
                <children>
                   <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="img-book" />
@@ -22,19 +22,19 @@
                      <children>
                         <AnchorPane>
                            <children>
-                              <Label styleClass="label-key" stylesheets="@../../../style/common.css" text="Price:" />
+                              <Label styleClass="label-key" stylesheets="@../style/common.css" text="Price:" />
                               <Label fx:id="labelPrice" layoutX="97.0" styleClass="label-value" stylesheets="@../../../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Label styleClass="label-key" stylesheets="@../../../style/common.css" text="Available:" />
+                              <Label styleClass="label-key" stylesheets="@../style/common.css" text="Available:" />
                               <Label fx:id="labelStoreQuantity" layoutX="51.0" styleClass="label-value" stylesheets="@../../../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
                            <children>
-                              <Label styleClass="label-key" stylesheets="@../../../style/common.css" text="Quantity:" />
+                              <Label styleClass="label-key" stylesheets="@../style/common.css" text="Quantity:" />
                               <Spinner fx:id="spinnerBuyingQuantity" layoutX="78.0" prefHeight="25.0" prefWidth="56.0" stylesheets="@../../../style/common.css" />
                            </children>
                         </AnchorPane>
