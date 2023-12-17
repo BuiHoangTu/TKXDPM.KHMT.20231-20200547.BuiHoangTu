@@ -1,4 +1,4 @@
-package hust.mssv20200547.pttkhtaims.models;
+package hust.mssv20200547.pttkhtaims.subsystem.bank.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

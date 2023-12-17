@@ -1,21 +1,44 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
-import javafx.scene.control.Button;
+import hust.mssv20200547.pttkhtaims.AIMS;
+import hust.mssv20200547.pttkhtaims.views.DeliveryFormView;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class CartController {
-    public Label pageTitle;
-    public ImageView aimsImage;
-    public VBox vboxCart;
-    public Label subtotal;
-    public Label labelSubtotal;
-    public Label labelVAT;
-    public Label labelAmount;
-    public Button btnPlaceOrder;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public void requestToPlaceOrder(MouseEvent mouseEvent) {
+public class CartController implements Initializable {
+    @FXML
+    private Label pageTitle;
+    @FXML
+    private ImageView aimsImage;
+    @FXML
+    private VBox vboxCart;
+    @FXML
+    private Label subtotal;
+    @FXML
+    private Label labelSubtotal;
+    @FXML
+    private Label labelVAT;
+    @FXML
+    private Label labelAmount;
+
+
+    @FXML
+    private void placeOrder(ActionEvent actionEvent) throws IOException {
+        var deliveryForm = new DeliveryFormView();
+        deliveryForm.apply((Stage) this.labelAmount.getScene().getWindow());
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.labelAmount.setText(String.valueOf(AIMS.cart.totalPrice()));
     }
 }

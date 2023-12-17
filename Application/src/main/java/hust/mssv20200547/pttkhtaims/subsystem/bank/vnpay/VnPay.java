@@ -1,7 +1,8 @@
 package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 
-import hust.mssv20200547.pttkhtaims.models.Invoice;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.models.Invoice;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IBank;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -10,6 +11,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class VnPay implements IBank {
+    @Override
+    public PaymentTransaction makePaymentTransaction(Invoice invoice, String contents) {
+        return null;
+    }
+
     public String generatePayOrderUrl(Invoice invoice, String contents) throws IOException {
         long vnpAmount = (long) invoice.getTotalFee() * 100 * 1000;
 
@@ -83,4 +89,6 @@ public class VnPay implements IBank {
 //        }
         return "127.0.0.1:50387";
     }
+
+
 }

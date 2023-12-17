@@ -8,6 +8,14 @@ import java.util.Set;
 public class Cart implements Map< Media, Long> {
     private final Map< Media, Long> content = new HashMap<>();
 
+    public long totalPrice() {
+        long total = 0;
+        for (var entry : content.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
+    }
+
     @Override
     public int size() {
         return content.size();
