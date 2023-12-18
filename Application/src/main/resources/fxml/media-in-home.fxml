@@ -23,24 +23,24 @@
                         <AnchorPane>
                            <children>
                               <Label styleClass="label-key" stylesheets="@../style/common.css" text="Price:" />
-                              <Label fx:id="labelPrice" layoutX="97.0" styleClass="label-value" stylesheets="@../../../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
+                              <Label fx:id="labelPrice" layoutX="97.0" styleClass="label-value" stylesheets="@../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
                            <children>
                               <Label styleClass="label-key" stylesheets="@../style/common.css" text="Available:" />
-                              <Label fx:id="labelStoreQuantity" layoutX="51.0" styleClass="label-value" stylesheets="@../../../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
+                              <Label fx:id="labelStoreQuantity" layoutX="51.0" styleClass="label-value" stylesheets="@../style/common.css" text="Label" AnchorPane.rightAnchor="10.0" />
                            </children>
                         </AnchorPane>
                         <AnchorPane>
                            <children>
                               <Label styleClass="label-key" stylesheets="@../style/common.css" text="Quantity:" />
-                              <Spinner fx:id="spinnerBuyingQuantity" layoutX="78.0" prefHeight="25.0" prefWidth="56.0" stylesheets="@../../../style/common.css" />
+                              <Spinner fx:id="spinnerBuyingQuantity" layoutX="78.0" prefHeight="25.0" prefWidth="56.0" stylesheets="@../style/common.css" />
                            </children>
                         </AnchorPane>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Button fx:id="buttonAddToCart" mnemonicParsing="false" onAction="#addToCart" stylesheets="@../../../style/common.css" text="Add to cart">
+                              <Button fx:id="buttonAddToCart" mnemonicParsing="false" onAction="#addToCart" stylesheets="@../style/common.css" text="Add to cart">
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>

@@ -23,7 +23,7 @@ public class VnPayConfig {
     public static final String TIME_SECTOR = "Etc/GMT+7";
 
     public static String md5(String message) {
-        String digest = null;
+        String digest;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] hash = md.digest(message.getBytes(StandardCharsets.UTF_8));
@@ -39,7 +39,7 @@ public class VnPayConfig {
     }
 
     public static String Sha256(String message) {
-        String digest = null;
+        String digest;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
             byte[] hash = md.digest(message.getBytes(StandardCharsets.UTF_8));
@@ -63,7 +63,7 @@ public class VnPayConfig {
         while (itr.hasNext()) {
             String fieldName = (String) itr.next();
             String fieldValue = (String) fields.get(fieldName);
-            if ((fieldValue != null) && (fieldValue.length() > 0)) {
+            if ((fieldValue != null) && (!fieldValue.isEmpty())) {
                 sb.append(fieldName);
                 sb.append("=");
                 sb.append(fieldValue);
