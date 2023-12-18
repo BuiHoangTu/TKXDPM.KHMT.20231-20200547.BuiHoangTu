@@ -1,13 +1,11 @@
 package hust.mssv20200547.pttkhtaims.services;
 
-import hust.mssv20200547.pttkhtaims.database.IDatabase;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.models.Cart;
-import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import hust.mssv20200547.pttkhtaims.models.Order;
 
 import java.sql.SQLException;
-import java.util.List;
 import java.util.Map;
 
 public interface IPlaceOrderService {
@@ -26,7 +24,7 @@ public interface IPlaceOrderService {
      * @param cart contains all products customer is going to purchase
      * @return map of items that are not sufficient with the maximum
      */
-    Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) throws SQLException;
+    Map<Media, Long> validateProductQuantity(IMediaSource database, Cart cart) throws SQLException;
 
     boolean validateName(String name);
 

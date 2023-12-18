@@ -1,7 +1,7 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
-import hust.mssv20200547.pttkhtaims.database.IDatabase;
-import hust.mssv20200547.pttkhtaims.database.MySqlAims;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
+import hust.mssv20200547.pttkhtaims.database.MediaSourceMySql;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import hust.mssv20200547.pttkhtaims.views.MediaInHomeView;
 import javafx.event.ActionEvent;
@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-    private static final IDatabase MYSQL = new MySqlAims();
+    private static final IMediaSource MYSQL = new MediaSourceMySql();
 
     @FXML
     private RadioMenuItem radioMenuItemTitle;

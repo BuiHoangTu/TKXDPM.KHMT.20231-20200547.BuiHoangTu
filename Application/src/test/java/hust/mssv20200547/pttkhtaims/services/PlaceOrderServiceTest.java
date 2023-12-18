@@ -1,7 +1,7 @@
 package hust.mssv20200547.pttkhtaims.services;
 
-import hust.mssv20200547.pttkhtaims.database.DatabaseImp;
-import hust.mssv20200547.pttkhtaims.database.IDatabase;
+import hust.mssv20200547.pttkhtaims.database.MediaSourceImp;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import jakarta.json.JsonArray;
@@ -20,12 +20,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PlaceOrderServiceTest {
     private IPlaceOrderService placeOrderService;
-    private IDatabase database;
+    private IMediaSource database;
 
     @BeforeEach
     void setUp() {
         this.placeOrderService = new PlaceOrderService();
-        this.database = new DatabaseImp();
+        this.database = new MediaSourceImp();
     }
 
     @ParameterizedTest

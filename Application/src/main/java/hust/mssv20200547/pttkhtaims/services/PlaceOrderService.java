@@ -1,8 +1,7 @@
 package hust.mssv20200547.pttkhtaims.services;
 
-import hust.mssv20200547.pttkhtaims.database.IDatabase;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.models.Cart;
-import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import hust.mssv20200547.pttkhtaims.models.Order;
 
@@ -21,7 +20,7 @@ public class PlaceOrderService implements IPlaceOrderService {
     }
 
     @Override
-    public Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) throws SQLException {
+    public Map<Media, Long> validateProductQuantity(IMediaSource database, Cart cart) throws SQLException {
         Map<Media, Long> infeasibleProducts = new HashMap<>();
 
         Map<Media, Long> inDBMedias = database.get(cart.keySet());

@@ -10,8 +10,8 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class MySqlAims implements IDatabase{
-    private static final org.slf4j.Logger LOGGER_MY_SQL_AIMS = org.slf4j.LoggerFactory.getLogger(MySqlAims.class);
+public class MediaSourceMySql implements IMediaSource {
+    private static final org.slf4j.Logger LOGGER_MY_SQL_AIMS = org.slf4j.LoggerFactory.getLogger(MediaSourceMySql.class);
     @Override
     public Map<Media, Long> get(Collection<Media> medias) throws SQLException {
         List<Long> ids = medias.stream().map(Media::getId).toList();

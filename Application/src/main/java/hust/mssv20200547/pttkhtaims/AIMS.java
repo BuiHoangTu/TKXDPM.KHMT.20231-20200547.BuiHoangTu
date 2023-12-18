@@ -44,7 +44,6 @@ public class AIMS extends Application {
 
         // app run
         fadeAppear.play();
-
     }
 
     public static void main(String[] args) {

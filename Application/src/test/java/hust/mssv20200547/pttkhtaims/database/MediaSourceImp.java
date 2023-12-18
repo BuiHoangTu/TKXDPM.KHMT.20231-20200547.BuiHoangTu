@@ -10,11 +10,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class DatabaseImp implements IDatabase{
+public class MediaSourceImp implements IMediaSource {
     private final Map<Media, Long> data = new HashMap<>();
 
-    public DatabaseImp() {
-        try (JsonReader jsonReader = Json.createReader(DatabaseImp.class.getResourceAsStream("/hust/mssv20200547/pttkhtaims/services/place-order-service-test/database.json"))) {
+    public MediaSourceImp() {
+        try (JsonReader jsonReader = Json.createReader(MediaSourceImp.class.getResourceAsStream("/hust/mssv20200547/pttkhtaims/services/place-order-service-test/database.json"))) {
             var databaseJson = jsonReader.readArray();
 
             for(var item: databaseJson) {

@@ -1,8 +1,8 @@
 package hust.mssv20200547.pttkhtaims.views;
 
 import hust.mssv20200547.pttkhtaims.controllers.HomeController;
-import hust.mssv20200547.pttkhtaims.database.IDatabase;
-import hust.mssv20200547.pttkhtaims.database.MySqlAims;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
+import hust.mssv20200547.pttkhtaims.database.MediaSourceMySql;
 
 import java.io.IOException;
 import java.net.URL;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class HomeView extends BaseView {
     private static final URL PATH = HomeView.class.getResource("/fxml/home-screen-view.fxml");
-    private static final IDatabase MYSQL = new MySqlAims();
+    private static final IMediaSource MYSQL = new MediaSourceMySql();
 
     /**
      * Constructor

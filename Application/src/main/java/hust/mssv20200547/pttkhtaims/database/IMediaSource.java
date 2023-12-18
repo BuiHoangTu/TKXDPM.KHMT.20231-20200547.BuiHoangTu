@@ -4,10 +4,9 @@ import hust.mssv20200547.pttkhtaims.models.Media;
 
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
-public interface IDatabase {
+public interface IMediaSource {
     Map<Media, Long> get(Collection<Media> medias) throws SQLException;
 
     <M extends Media> M getMediaDetail(M media) throws SQLException;
