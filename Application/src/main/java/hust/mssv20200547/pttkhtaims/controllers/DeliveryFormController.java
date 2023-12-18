@@ -49,6 +49,8 @@ public class DeliveryFormController {
         long deliveryFee = placeOrderService.calculateDeliveryFee(order);
         Invoice invoice = new Invoice(totalPrice, deliveryFee);
         // TODO: save to db
+        // TODO: replace below with get generatedId
+        invoice.setOrderId(20);
         // TODO: put this in suitable class
         var res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
         // TODO: go to suitable class

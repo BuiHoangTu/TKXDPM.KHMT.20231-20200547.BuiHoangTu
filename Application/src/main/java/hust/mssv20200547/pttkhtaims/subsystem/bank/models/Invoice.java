@@ -2,8 +2,10 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @AllArgsConstructor
 public class Invoice {
     private int orderId;

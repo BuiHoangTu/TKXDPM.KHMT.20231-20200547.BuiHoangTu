@@ -1,6 +1,8 @@
 package hust.mssv20200547.pttkhtaims;
 
 import hust.mssv20200547.pttkhtaims.models.Cart;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.models.Invoice;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
 import hust.mssv20200547.pttkhtaims.views.HomeView;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -20,7 +22,7 @@ public class AIMS extends Application {
         primaryStage.setMaximized(true);
 
         // splash with fading
-        StackPane root = FXMLLoader.load(Objects.requireNonNull(AIMS.class.getResource("/hust/mssv20200547/pttkhtaims/splash-screen-view.fxml")));
+        StackPane root = FXMLLoader.load(Objects.requireNonNull(AIMS.class.getResource("/fxml/splash-screen-view.fxml")));
         Scene rootScene = new Scene(root);
         primaryStage.setScene(rootScene);
         primaryStage.show();
