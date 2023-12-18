@@ -7,19 +7,19 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Invoice {
     private int orderId;
-    private final int priceNoVat;
-    private final int priceWithVat;
-    private final int deliveryFee;
-    private final int totalFee;
+    private final long priceNoVat;
+    private final long priceWithVat;
+    private final long deliveryFee;
+    private final long totalFee;
 
-    public Invoice(int priceNoVat, int priceWithVat, int deliveryFee, int totalFee) {
+    public Invoice(long priceNoVat, long priceWithVat, long deliveryFee, long totalFee) {
         this.priceNoVat = priceNoVat;
         this.priceWithVat = priceWithVat;
         this.deliveryFee = deliveryFee;
         this.totalFee = totalFee;
     }
 
-    public Invoice(int priceNoVat, int deliveryFee) {
+    public Invoice(long priceNoVat, long deliveryFee) {
         this.priceNoVat = priceNoVat;
         this.priceWithVat = priceNoVat * 10/100;
         this.deliveryFee = deliveryFee;

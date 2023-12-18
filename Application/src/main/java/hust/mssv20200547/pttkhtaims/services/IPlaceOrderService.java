@@ -2,7 +2,9 @@ package hust.mssv20200547.pttkhtaims.services;
 
 import hust.mssv20200547.pttkhtaims.database.IDatabase;
 import hust.mssv20200547.pttkhtaims.models.Cart;
+import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
 import hust.mssv20200547.pttkhtaims.models.Media;
+import hust.mssv20200547.pttkhtaims.models.Order;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,5 +29,7 @@ public interface IPlaceOrderService {
     Map<Media, Long> validateProductQuantity(IDatabase database, Cart cart) throws SQLException;
 
     boolean validateName(String name);
+
+    long calculateDeliveryFee(Order o);
 
 }
