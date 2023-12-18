@@ -3,6 +3,7 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.Invoice;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IBank;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay.PayView;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -13,11 +14,19 @@ import java.util.*;
 public class VnPay implements IBank {
     @Override
     public PaymentTransaction makePaymentTransaction(Invoice invoice, String contents) {
+        try {
+            String payUrl = this.generatePayOrderUrl(invoice, contents);
+            // create entries URL
+            new PayView(payUrl);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         return null;
     }
 
     public String generatePayOrderUrl(Invoice invoice, String contents) throws IOException {
-        long vnpAmount = (long) invoice.getTotalFee() * 100 * 1000;
+        long vnpAmount = invoice.getTotalFee() * 100 * 1000;
 
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", VnPayConfig.VERSION);
