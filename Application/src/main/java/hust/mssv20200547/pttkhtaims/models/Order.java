@@ -15,10 +15,16 @@ import java.util.Map;
 @Setter
 public class Order {
     public enum OrderStatus {
-        NOT_PAID,
-        PAID_SHIPPING,
-        DELIVERED,
-        CANCELED
+        NOT_PAID (1),
+        PAID_SHIPPING (2),
+        DELIVERED (3),
+        CANCELED (4);
+
+        @Getter
+        private final int i;
+        private OrderStatus(int i) {
+            this.i = i;
+        }
     }
 
     private int orderId;
