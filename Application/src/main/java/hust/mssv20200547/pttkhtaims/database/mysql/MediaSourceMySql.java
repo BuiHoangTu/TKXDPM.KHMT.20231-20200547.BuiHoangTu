@@ -1,6 +1,7 @@
-package hust.mssv20200547.pttkhtaims.database;
+package hust.mssv20200547.pttkhtaims.database.mysql;
 
 import com.mysql.cj.exceptions.FeatureNotAvailableException;
+import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.models.*;
 
 import java.io.InputStream;
@@ -10,13 +11,13 @@ import java.sql.*;
 import java.sql.Date;
 import java.util.*;
 
-public class MediaSourceMySql implements IMediaSource {
+public class MediaSourceMySql extends MysqlBase implements IMediaSource {
     private static final org.slf4j.Logger LOGGER_MY_SQL_AIMS = org.slf4j.LoggerFactory.getLogger(MediaSourceMySql.class);
     @Override
     public Map<Media, Long> get(Collection<Media> medias) throws SQLException {
         List<Long> ids = medias.stream().map(Media::getId).toList();
 
-        return accessDB((mysql) -> {
+        try (var mysql = openConnection()) {
             var preparedStatement = mysql.prepareStatement(
                     "Select id, title, category, value, price, quantity " +
                     "From media " +
@@ -57,12 +58,12 @@ public class MediaSourceMySql implements IMediaSource {
             }
 
             return res;
-        });
+        }
     }
 
     @Override
     public <M extends Media> M getMediaDetail(M media) throws SQLException {
-        accessDB((mysql -> {
+        try (var mysql = openConnection()) {
             if (media instanceof Book book) {
                 var preparedStatement = mysql.prepareStatement(
                         "Select authors, cover, publisher, publicationDate, language, numberOfPages, genres " +
@@ -81,7 +82,7 @@ public class MediaSourceMySql implements IMediaSource {
                     book.setNumberOfPages(rsIte.getLong());
                     book.setGenre(rsIte.getString());
                     
-                    return book;
+                    return (M) book;
                 } else throw new SQLException("Media continuous is broken at ID = " + media.getId());
             } else if (media instanceof CD cd) {
                 var preparedStatement = mysql.prepareStatement(
@@ -99,7 +100,7 @@ public class MediaSourceMySql implements IMediaSource {
                     cd.setGenre(rsIte.getString());
                     cd.setPublicationDate(rsIte.getDate().toLocalDate());
 
-                    return cd;
+                    return (M) cd;
                 } else throw new SQLException("Media continuous is broken at ID = " + media.getId());
             } else if (media instanceof DigitalVideoDisc dvd) {
                 var preparedStatement = mysql.prepareStatement(
@@ -120,7 +121,7 @@ public class MediaSourceMySql implements IMediaSource {
                     dvd.setPublicationDate(rsIte.getDate().toLocalDate());
                     dvd.setGenre(rsIte.getString());
 
-                    return dvd;
+                    return (M) dvd;
                 } else throw new SQLException("Media continuous is broken at ID = " + media.getId());
             } else if (media instanceof LongPlayRecord lpr) {
                 var preparedStatement = mysql.prepareStatement(
@@ -141,19 +142,17 @@ public class MediaSourceMySql implements IMediaSource {
                     lpr.setPublicationDate(rsIte.getDate().toLocalDate());
                     lpr.setGenre(rsIte.getString());
 
-                    return lpr;
+                    return (M) lpr;
                 } else throw new SQLException("Media continuous is broken at ID = " + media.getId());
             } else throw new FeatureNotAvailableException("This type of media is not implemented: " + media.getClass());
-        }));
-
-        return media;
+        }
     }
 
     @Override
     public Map<Media, Long> searchMedias(String searchType, String searchValue, int resQuantity) throws SQLException {
         LOGGER_MY_SQL_AIMS.info("Search {}: {}", searchType, searchValue );
 
-        return this.accessDB((mysql) -> {
+        try (var mysql = openConnection()) {
             var preparedStatement = mysql.prepareStatement(
                     "Select id, title, category, value, price, quantity " +
                             "From media " +
@@ -196,12 +195,6 @@ public class MediaSourceMySql implements IMediaSource {
             }
 
             return localRes;
-        });
-    }
-
-    private <T> T accessDB(SqlAction<Connection, T> action) throws SQLException {
-        try (var mysql = DriverManager.getConnection("jdbc:mysql://localhost:3306/personalaims", "personal_aims", "personal_aims")) {
-            return action.call(mysql);
         }
     }
     

@@ -2,7 +2,7 @@ package hust.mssv20200547.pttkhtaims.views;
 
 import hust.mssv20200547.pttkhtaims.controllers.HomeController;
 import hust.mssv20200547.pttkhtaims.database.IMediaSource;
-import hust.mssv20200547.pttkhtaims.database.MediaSourceMySql;
+import hust.mssv20200547.pttkhtaims.database.mysql.MediaSourceMySql;
 
 import java.io.IOException;
 import java.net.URL;

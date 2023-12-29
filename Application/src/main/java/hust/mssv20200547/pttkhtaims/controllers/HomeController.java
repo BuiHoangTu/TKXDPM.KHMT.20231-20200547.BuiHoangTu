@@ -1,7 +1,7 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.database.IMediaSource;
-import hust.mssv20200547.pttkhtaims.database.MediaSourceMySql;
+import hust.mssv20200547.pttkhtaims.database.mysql.MediaSourceMySql;
 import hust.mssv20200547.pttkhtaims.models.Media;
 import hust.mssv20200547.pttkhtaims.views.MediaInSquareView;
 import javafx.event.ActionEvent;
