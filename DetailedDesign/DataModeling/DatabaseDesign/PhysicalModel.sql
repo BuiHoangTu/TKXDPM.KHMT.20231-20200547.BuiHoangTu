@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `aims_order` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
     `paymentInfoId` varchar(100) DEFAULT NULL,
     `deliveryInfoId` int(11) NOT NULL,
+    `orderStatus` int(11),
     PRIMARY KEY (`id`),
     KEY `FK_Order_Payment` (`paymentInfoId`),
     KEY `FK_Order_DeliveryInfo` (`deliveryInfoId`)

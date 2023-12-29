@@ -1,5 +1,6 @@
 package hust.mssv20200547.pttkhtaims.views;
 
+import hust.mssv20200547.pttkhtaims.AIMS;
 import hust.mssv20200547.pttkhtaims.controllers.CartController;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class CartView extends BaseView{
      */
     public CartView() throws IOException {
         super(PATH);
+        this.getController().setCart(AIMS.cart);
     }
 
     @Override

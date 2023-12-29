@@ -6,12 +6,12 @@ import java.util.Date;
 
 @Getter
 public class PaymentTransaction {
-    private String transactionId;
-    private String errorCode;
-    private String transactionContent;
-    private int amount;
+    private final String transactionId;
+    private final String errorCode;
+    private final String transactionContent;
+    private final int amount;
     private Integer orderID;
-    private Date createdAt;
+    private final Date createdAt;
 
     public PaymentTransaction(String errorCode, String transactionId, String transactionContent,
                               int amount, Date createdAt) {
@@ -24,9 +24,5 @@ public class PaymentTransaction {
         this.createdAt = createdAt;
     }
 
-
-    public String getTransactionContent() {
-        return transactionContent;
-    }
 
 }

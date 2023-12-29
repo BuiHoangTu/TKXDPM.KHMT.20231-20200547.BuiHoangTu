@@ -16,7 +16,7 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class MediaInHomeController implements Initializable {
+public class MediaInSquareController implements Initializable {
     private Media m;
     @FXML
     private ImageView imageView;

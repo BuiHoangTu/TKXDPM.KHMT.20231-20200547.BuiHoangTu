@@ -3,7 +3,7 @@ package hust.mssv20200547.pttkhtaims.controllers;
 import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.database.MediaSourceMySql;
 import hust.mssv20200547.pttkhtaims.models.Media;
-import hust.mssv20200547.pttkhtaims.views.MediaInHomeView;
+import hust.mssv20200547.pttkhtaims.views.MediaInSquareView;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
@@ -65,8 +65,8 @@ public class HomeController implements Initializable {
         vBoxes.clearAll();
 
         for (var mediaEntry : mediaEntries) {
-            var mediaView = new MediaInHomeView();
-            MediaInHomeController mediaController = mediaView.getController();
+            var mediaView = new MediaInSquareView();
+            MediaInSquareController mediaController = mediaView.getController();
             mediaController.setMedia(mediaEntry);
             vBoxes.next().getChildren().add(mediaView.getRoot());
         }

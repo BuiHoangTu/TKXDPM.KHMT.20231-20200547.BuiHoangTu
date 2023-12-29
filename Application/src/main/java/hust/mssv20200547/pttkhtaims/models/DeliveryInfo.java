@@ -13,4 +13,5 @@ public class DeliveryInfo {
     private String email;
     private String cityAddress;
     private String detailedAddress;
+    private String instruction;
 }

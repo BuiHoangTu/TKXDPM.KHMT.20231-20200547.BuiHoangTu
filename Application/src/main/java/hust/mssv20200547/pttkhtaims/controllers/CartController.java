@@ -1,7 +1,9 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
+import hust.mssv20200547.pttkhtaims.models.Cart;
 import hust.mssv20200547.pttkhtaims.views.DeliveryFormView;
+import hust.mssv20200547.pttkhtaims.views.MediaInVerticalView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,5 +42,16 @@ public class CartController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.labelAmount.setText(String.valueOf(AIMS.cart.totalPrice()));
+    }
+
+    public void setCart(Cart cart) throws IOException {
+        var medias = this.vboxCart.getChildren();
+
+        for (var mediaEntry : cart.entrySet()) {
+            var mediaView = new MediaInVerticalView();
+            MediaInVerticalController mediaController = mediaView.getController();
+            mediaController.setMedia(mediaEntry);
+            medias.add(mediaView.getRoot());
+        }
     }
 }

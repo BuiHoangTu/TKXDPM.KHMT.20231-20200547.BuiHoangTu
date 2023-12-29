@@ -1,8 +1,6 @@
 package hust.mssv20200547.pttkhtaims;
 
 import hust.mssv20200547.pttkhtaims.models.Cart;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.Invoice;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
 import hust.mssv20200547.pttkhtaims.views.HomeView;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;

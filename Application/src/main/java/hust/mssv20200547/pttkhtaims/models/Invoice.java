@@ -1,5 +1,6 @@
-package hust.mssv20200547.pttkhtaims.subsystem.bank.models;
+package hust.mssv20200547.pttkhtaims.models;
 
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IInvoice;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Invoice {
+public class Invoice implements IInvoice {
     private int orderId;
     private final long priceNoVat;
     private final long priceWithVat;
