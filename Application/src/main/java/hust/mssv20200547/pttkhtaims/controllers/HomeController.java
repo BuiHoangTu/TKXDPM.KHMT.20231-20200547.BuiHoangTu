@@ -1,8 +1,10 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
+import hust.mssv20200547.pttkhtaims.AIMS;
 import hust.mssv20200547.pttkhtaims.database.IMediaSource;
 import hust.mssv20200547.pttkhtaims.database.mysql.MediaSourceMySql;
 import hust.mssv20200547.pttkhtaims.models.Media;
+import hust.mssv20200547.pttkhtaims.views.CartView;
 import hust.mssv20200547.pttkhtaims.views.MediaInSquareView;
 import javafx.event.ActionEvent;
 import javafx.event.EventType;
@@ -10,8 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -83,6 +87,15 @@ public class HomeController implements Initializable {
         if (selected == this.radioMenuItemCategory) {
             this.setMedias(MYSQL.searchMedias("category", this.textFieldSearch.getText(), 20));
         }
+    }
+
+    @FXML
+    public void openCart(MouseEvent mouseEvent) throws IOException {
+        var cartView = new CartView();
+
+        cartView.apply((Stage) cartImage.getScene().getWindow());
+
+        cartView.getController().setCart(AIMS.cart);
     }
 
 
