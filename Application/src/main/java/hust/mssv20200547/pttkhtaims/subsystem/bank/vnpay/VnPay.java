@@ -1,7 +1,7 @@
 package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 
-import hust.mssv20200547.pttkhtaims.subsystem.bank.IInvoice;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IBank;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IInvoice;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay.PayView;
 
@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.URLEncoder;
-import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -28,7 +27,7 @@ public class VnPay implements IBank {
         return null;
     }
 
-    public String generatePayOrderUrl(IInvoice invoice, String contents) throws IOException {
+    public String generatePayOrderUrl(IInvoice invoice, String contents) {
         long vnpAmount = invoice.getTotalFee() * 100 * 1000;
 
         Map<String, String> vnp_Params = new HashMap<>();
@@ -59,13 +58,12 @@ public class VnPay implements IBank {
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
 
-        List fieldNames = new ArrayList(vnp_Params.keySet());
-        Collections.sort(fieldNames);
+        List<String> sortedFieldNames = vnp_Params.keySet().stream().sorted().toList();
         StringBuilder hashData = new StringBuilder();
         StringBuilder query = new StringBuilder();
-        var itr = fieldNames.iterator();
+        var itr = sortedFieldNames.iterator();
         while (itr.hasNext()) {
-            String fieldName = (String) itr.next();
+            String fieldName = itr.next();
             String fieldValue = vnp_Params.get(fieldName);
             if ((fieldValue != null) && (!fieldValue.isEmpty())) {
                 //Build hash data
