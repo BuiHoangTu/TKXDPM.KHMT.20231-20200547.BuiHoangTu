@@ -6,7 +6,10 @@ import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay.PayView;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -85,18 +88,14 @@ public class VnPay implements IBank {
         return VnPayConfig.PAY_URL + "?" + queryUrl;
     }
 
-    private String getIpAddress() throws IOException {
-//        URL url = new URL("http://www.realip.info/api/p/realip.php");
-//        try (BufferedReader in = new BufferedReader(new InputStreamReader(url.openConnection().getInputStream()))) {
-//            String content = String.join("\n", in.lines().collect(Collectors.toList()));
-//            Matcher matcher = pattern.matcher(content);
-//            if (matcher.matches()) {
-//                return matcher.group("ip");
-//            } else {
-//                return "No ip found";
-//            }
-//        }
-        return "127.0.0.1:50387";
+    private String getIpAddress() {
+        try(final DatagramSocket socket = new DatagramSocket()){
+            socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+            return socket.getLocalAddress().getHostAddress();
+        } catch (IOException e) {
+            // default
+            return "127.0.0.1:50387";
+        }
     }
 
 
