@@ -75,7 +75,7 @@
                         <Font size="18.0" />
                      </font>
                   </RadioButton>
-                  <Button layoutX="14.0" layoutY="445.0" mnemonicParsing="false" onAction="#updateDeliveryMethodInfo" onMouseClicked="#updateDeliveryMethodInfo" prefHeight="55.0" prefWidth="406.0" style="-fx-background-color: #409EFF;-fx-cursor: hand;" text="Update Delivery Method" textFill="WHITE">
+                  <Button layoutX="14.0" layoutY="445.0" mnemonicParsing="false" onAction="#updateDeliveryMethodInfo" prefHeight="55.0" prefWidth="406.0" style="-fx-background-color: #409EFF;-fx-cursor: hand;" text="Update Delivery Method" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

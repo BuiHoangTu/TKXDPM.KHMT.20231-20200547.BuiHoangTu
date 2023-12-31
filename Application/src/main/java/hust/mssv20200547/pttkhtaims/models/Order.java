@@ -22,7 +22,7 @@ public class Order {
 
         @Getter
         private final int i;
-        private OrderStatus(int i) {
+        OrderStatus(int i) {
             this.i = i;
         }
     }

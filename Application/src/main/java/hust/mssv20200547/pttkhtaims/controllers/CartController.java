@@ -24,9 +24,9 @@ public class CartController implements Initializable {
     @FXML
     private VBox vboxCart;
     @FXML
-    private Label subtotal;
-    @FXML
     private Label labelSubtotal;
+    @FXML
+    private Label trashlabelSubtotal;
     @FXML
     private Label labelVAT;
     @FXML
@@ -44,13 +44,14 @@ public class CartController implements Initializable {
         this.labelAmount.setText(String.valueOf(AIMS.cart.totalPrice()));
     }
 
-    public void setCart(Cart cart) throws IOException {
+    public void setDefaultValues(Cart cart) throws IOException {
         var medias = this.vboxCart.getChildren();
+        medias.clear();
 
         for (var mediaEntry : cart.entrySet()) {
             var mediaView = new MediaInVerticalView();
             MediaInVerticalController mediaController = mediaView.getController();
-            mediaController.setMedia(mediaEntry);
+            mediaController.setDefaultValues(mediaEntry);
             medias.add(mediaView.getRoot());
         }
     }

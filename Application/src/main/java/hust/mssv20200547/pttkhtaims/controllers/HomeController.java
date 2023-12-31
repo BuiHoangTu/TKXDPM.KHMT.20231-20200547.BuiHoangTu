@@ -63,7 +63,7 @@ public class HomeController implements Initializable {
         });
     }
 
-    public void setMedias(Map<Media, Long> medias) throws IOException {
+    public void setDefaultValues(Map<Media, Long> medias) throws IOException {
         var mediaEntries = medias.entrySet().stream().toList();
         var vBoxes = new VBoxNext(vBoxMedia1, vBoxMedia2, vBoxMedia3, vBoxMedia4);
         vBoxes.clearAll();
@@ -71,7 +71,7 @@ public class HomeController implements Initializable {
         for (var mediaEntry : mediaEntries) {
             var mediaView = new MediaInSquareView();
             MediaInSquareController mediaController = mediaView.getController();
-            mediaController.setMedia(mediaEntry);
+            mediaController.setDefaultValues(mediaEntry);
             vBoxes.next().getChildren().add(mediaView.getRoot());
         }
     }
@@ -81,11 +81,11 @@ public class HomeController implements Initializable {
         var selected = this.searchType.getSelectedToggle();
 
         if (selected == this.radioMenuItemTitle) {
-            this.setMedias(MYSQL.searchMedias("title", this.textFieldSearch.getText(), 20));
+            this.setDefaultValues(MYSQL.searchMedias("title", this.textFieldSearch.getText(), 20));
         }
 
         if (selected == this.radioMenuItemCategory) {
-            this.setMedias(MYSQL.searchMedias("category", this.textFieldSearch.getText(), 20));
+            this.setDefaultValues(MYSQL.searchMedias("category", this.textFieldSearch.getText(), 20));
         }
     }
 
@@ -95,7 +95,7 @@ public class HomeController implements Initializable {
 
         cartView.apply((Stage) cartImage.getScene().getWindow());
 
-        cartView.getController().setCart(AIMS.cart);
+        cartView.getController().setDefaultValues(AIMS.cart);
     }
 
 

@@ -1,19 +1,29 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
+import hust.mssv20200547.pttkhtaims.database.IDeliveryInfoSource;
+import hust.mssv20200547.pttkhtaims.database.IInvoiceSource;
+import hust.mssv20200547.pttkhtaims.database.IOrderSource;
+import hust.mssv20200547.pttkhtaims.database.IPaymentInfoSource;
+import hust.mssv20200547.pttkhtaims.database.mysql.DeliveryInfoSource;
+import hust.mssv20200547.pttkhtaims.database.mysql.InvoiceSource;
+import hust.mssv20200547.pttkhtaims.database.mysql.OrderSource;
+import hust.mssv20200547.pttkhtaims.database.mysql.PaymentInfoSource;
 import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
 import hust.mssv20200547.pttkhtaims.models.Order;
 import hust.mssv20200547.pttkhtaims.services.IPlaceOrderService;
 import hust.mssv20200547.pttkhtaims.services.PlaceOrderService;
 import hust.mssv20200547.pttkhtaims.models.Invoice;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
 import hust.mssv20200547.pttkhtaims.views.BaseView;
+import hust.mssv20200547.pttkhtaims.views.InvoiceView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DeliveryFormController implements Initializable {
@@ -47,15 +57,17 @@ public class DeliveryFormController implements Initializable {
     private Label errorProvince;
 
     private IPlaceOrderService placeOrderService = new PlaceOrderService();
+    private IDeliveryInfoSource deliveryInfoSource = new DeliveryInfoSource();
+    private IOrderSource orderSource = new OrderSource();
+    private IPaymentInfoSource paymentInfoSource = new PaymentInfoSource();
+    private IInvoiceSource invoiceSource = new InvoiceSource();
 
     @FXML
     private void goBackPage() {
         view.apply((Stage) radioFastDelivery.getScene().getWindow());
     }
     @FXML
-    private void updateDeliveryMethodInfo() {
-        // TODO: save to invoice,
-        // TODO: switch to invoice screen first
+    private void updateDeliveryMethodInfo() throws IOException, SQLException {
         var receiver = this.tfReceiver.getText();
         var phone = this.tfPhoneNumber.getText();
         var email = this.tfEmail.getText();
@@ -70,16 +82,21 @@ public class DeliveryFormController implements Initializable {
         long totalPrice = AIMS.cart.totalPrice();
         Order order = new Order(AIMS.cart, deliveryInfo);
 
-        // TODO: save db
+        // create in db
+        int deliveryId = this.deliveryInfoSource.saveDeliveryInfo(deliveryInfo);
+        int paymentId = this.paymentInfoSource.createHolder();
+        int orderId = this.orderSource.saveOrder(paymentId, deliveryId);
 
         long deliveryFee = placeOrderService.calculateDeliveryFee(order);
         Invoice invoice = new Invoice(totalPrice, deliveryFee);
+        invoice.setOrderId(orderId);
+
         // TODO: save to db
-        // TODO: replace below with get generatedId
-        invoice.setOrderId(20);
-        // TODO: put this in suitable class
-        var res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
-        // TODO: go to suitable class
+        this.invoiceSource.saveInvoice(invoice);
+
+        var invoiceView = new InvoiceView();
+        invoiceView.getController().setDefaultValues(deliveryInfo, invoice);
+        invoiceView.apply((Stage) tfReceiver.getScene().getWindow());
     }
 
     public void setPrevPage(BaseView view) {
@@ -97,7 +114,7 @@ public class DeliveryFormController implements Initializable {
 
         this.tfPhoneNumber.focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
             if (!newPropertyValue) {
-                var res = placeOrderService.validateName(this.tfPhoneNumber.getText());
+                var res = placeOrderService.validatePhoneNumber(this.tfPhoneNumber.getText());
                 errorNumber.setVisible(!res);
             }
         });

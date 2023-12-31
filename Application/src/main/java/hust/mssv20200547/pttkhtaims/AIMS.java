@@ -38,7 +38,7 @@ public class AIMS extends Application {
 
         // home
         var home = new HomeView();
-        fadeAppear.setOnFinished((event -> home.apply(primaryStage)));
+        fadeDisappear.setOnFinished((event -> home.apply(primaryStage)));
 
         // app run
         fadeAppear.play();

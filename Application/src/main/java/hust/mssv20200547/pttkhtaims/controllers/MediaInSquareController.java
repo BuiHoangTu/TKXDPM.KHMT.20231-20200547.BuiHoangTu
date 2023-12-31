@@ -39,7 +39,7 @@ public class MediaInSquareController implements Initializable {
         spinnerBuyingQuantity.setValueFactory(this.spinnerValueFactory);
     }
 
-    public void setMedia(Map.Entry<Media, Long> mediaEntry) {
+    public void setDefaultValues(Map.Entry<Media, Long> mediaEntry) {
         this.m = mediaEntry.getKey();
         this.labelTitle.setText(m.getTitle());
         this.labelPrice.setText(String.valueOf(m.getPrice()));

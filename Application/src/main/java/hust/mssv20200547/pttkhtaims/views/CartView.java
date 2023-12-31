@@ -17,7 +17,7 @@ public class CartView extends BaseView{
      */
     public CartView() throws IOException {
         super(PATH);
-        this.getController().setCart(AIMS.cart);
+        this.getController().setDefaultValues(AIMS.cart);
     }
 
     @Override

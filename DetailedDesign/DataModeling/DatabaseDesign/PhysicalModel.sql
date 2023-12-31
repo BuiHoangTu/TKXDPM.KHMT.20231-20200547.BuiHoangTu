@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 10, 2023 at 04:59 PM
+-- Generation Time: Dec 31, 2023 at 04:41 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,13 +39,21 @@ GRANT ALL PRIVILEGES ON personalaims.* TO 'personal_aims'@'localhost';
 
 CREATE TABLE IF NOT EXISTS `aims_order` (
                                             `id` int(11) NOT NULL AUTO_INCREMENT,
-    `paymentInfoId` varchar(100) DEFAULT NULL,
-    `deliveryInfoId` int(11) NOT NULL,
-    `orderStatus` int(11),
-    PRIMARY KEY (`id`),
-    KEY `FK_Order_Payment` (`paymentInfoId`),
-    KEY `FK_Order_DeliveryInfo` (`deliveryInfoId`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                            `paymentInfoId` int(11) DEFAULT NULL,
+                                            `deliveryInfoId` int(11) NOT NULL,
+                                            `orderStatus` int(11) NOT NULL,
+                                            PRIMARY KEY (`id`),
+                                            KEY `FK_Order_Payment` (`paymentInfoId`),
+                                            KEY `FK_Order_DeliveryInfo` (`deliveryInfoId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `aims_order`
+--
+
+INSERT INTO `aims_order` (`id`, `paymentInfoId`, `deliveryInfoId`, `orderStatus`) VALUES
+                                                                                      (1, 1, 13, 1),
+                                                                                      (2, 2, 14, 1);
 
 -- --------------------------------------------------------
 
@@ -55,15 +63,15 @@ CREATE TABLE IF NOT EXISTS `aims_order` (
 
 CREATE TABLE IF NOT EXISTS `book` (
                                       `id` int(11) NOT NULL,
-    `authors` varchar(50) DEFAULT NULL,
-    `cover` varchar(50) DEFAULT NULL,
-    `publisher` varchar(50) DEFAULT NULL,
-    `publicationDate` date DEFAULT NULL,
-    `language` varchar(50) DEFAULT NULL,
-    `numberOfPages` int(11) DEFAULT NULL,
-    `genres` varchar(50) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                      `authors` varchar(50) DEFAULT NULL,
+                                      `cover` varchar(50) DEFAULT NULL,
+                                      `publisher` varchar(50) DEFAULT NULL,
+                                      `publicationDate` date DEFAULT NULL,
+                                      `language` varchar(50) DEFAULT NULL,
+                                      `numberOfPages` int(11) DEFAULT NULL,
+                                      `genres` varchar(50) DEFAULT NULL,
+                                      PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `book`
@@ -179,13 +187,13 @@ INSERT INTO `book` (`id`, `authors`, `cover`, `publisher`, `publicationDate`, `l
 
 CREATE TABLE IF NOT EXISTS `cd` (
                                     `id` int(11) NOT NULL,
-    `artists` varchar(50) DEFAULT NULL,
-    `recordLabel` varchar(50) DEFAULT NULL,
-    `trackList` varchar(50) DEFAULT NULL,
-    `genres` varchar(50) DEFAULT NULL,
-    `PublicationDate` date DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                    `artists` varchar(50) DEFAULT NULL,
+                                    `recordLabel` varchar(50) DEFAULT NULL,
+                                    `trackList` varchar(50) DEFAULT NULL,
+                                    `genres` varchar(50) DEFAULT NULL,
+                                    `PublicationDate` date DEFAULT NULL,
+                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cd`
@@ -301,13 +309,33 @@ INSERT INTO `cd` (`id`, `artists`, `recordLabel`, `trackList`, `genres`, `Public
 
 CREATE TABLE IF NOT EXISTS `delivery_info` (
                                                `id` int(11) NOT NULL AUTO_INCREMENT,
-    `receiver` varchar(50) DEFAULT NULL,
-    `phoneNumber` char(10) DEFAULT NULL,
-    `email` varchar(50) DEFAULT NULL,
-    `cityAddress` varchar(50) DEFAULT NULL,
-    `detailedAddress` varchar(50) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                               `receiver` varchar(50) DEFAULT NULL,
+                                               `phoneNumber` char(10) DEFAULT NULL,
+                                               `email` varchar(50) DEFAULT NULL,
+                                               `cityAddress` varchar(50) DEFAULT NULL,
+                                               `detailedAddress` varchar(50) DEFAULT NULL,
+                                               PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `delivery_info`
+--
+
+INSERT INTO `delivery_info` (`id`, `receiver`, `phoneNumber`, `email`, `cityAddress`, `detailedAddress`) VALUES
+                                                                                                             (1, 'tu', '0913913505', '', 'hanoi ', ''),
+                                                                                                             (2, 'tu', '0913913505', '', 'hanoi ', ''),
+                                                                                                             (3, 'tu', '0913913505', '', 'hanoi ', ''),
+                                                                                                             (4, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (5, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (6, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (7, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (8, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (9, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (10, 'tu', '0913913505', 'dsdsdsd', 'hanoi ', 'dsdsd'),
+                                                                                                             (11, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
+                                                                                                             (12, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
+                                                                                                             (13, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
+                                                                                                             (14, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr');
 
 -- --------------------------------------------------------
 
@@ -317,16 +345,16 @@ CREATE TABLE IF NOT EXISTS `delivery_info` (
 
 CREATE TABLE IF NOT EXISTS `digital_video_disc` (
                                                     `id` int(11) NOT NULL,
-    `discFormat` varchar(50) DEFAULT NULL,
-    `director` varchar(50) DEFAULT NULL,
-    `runTime` time DEFAULT NULL,
-    `studio` varchar(50) DEFAULT NULL,
-    `language` varchar(50) DEFAULT NULL,
-    `subtitles` varchar(50) DEFAULT NULL,
-    `publicationDate` date DEFAULT NULL,
-    `genres` varchar(50) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                                    `discFormat` varchar(50) DEFAULT NULL,
+                                                    `director` varchar(50) DEFAULT NULL,
+                                                    `runTime` time DEFAULT NULL,
+                                                    `studio` varchar(50) DEFAULT NULL,
+                                                    `language` varchar(50) DEFAULT NULL,
+                                                    `subtitles` varchar(50) DEFAULT NULL,
+                                                    `publicationDate` date DEFAULT NULL,
+                                                    `genres` varchar(50) DEFAULT NULL,
+                                                    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `digital_video_disc`
@@ -442,14 +470,22 @@ INSERT INTO `digital_video_disc` (`id`, `discFormat`, `director`, `runTime`, `st
 
 CREATE TABLE IF NOT EXISTS `invoice` (
                                          `id` int(11) NOT NULL AUTO_INCREMENT,
-    `orderId` int(11) NOT NULL,
-    `priceNoVAT` double DEFAULT NULL,
-    `priceWithVAT` double DEFAULT NULL,
-    `deliveryFee` double DEFAULT NULL,
-    `totalFee` double DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    KEY `FK_Invoice_Order` (`orderId`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                         `orderId` int(11) NOT NULL,
+                                         `priceNoVAT` double DEFAULT NULL,
+                                         `priceWithVAT` double DEFAULT NULL,
+                                         `deliveryFee` double DEFAULT NULL,
+                                         `totalFee` double DEFAULT NULL,
+                                         PRIMARY KEY (`id`),
+                                         KEY `FK_Invoice_Order` (`orderId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`id`, `orderId`, `priceNoVAT`, `priceWithVAT`, `deliveryFee`, `totalFee`) VALUES
+                                                                                                     (1, 1, 92, 9, 0, 9),
+                                                                                                     (2, 2, 53, 5, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -459,16 +495,16 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 
 CREATE TABLE IF NOT EXISTS `long_play_record` (
                                                   `id` int(11) NOT NULL,
-    `discFormat` varchar(50) DEFAULT NULL,
-    `director` varchar(50) DEFAULT NULL,
-    `runTime` time DEFAULT NULL,
-    `studio` varchar(50) DEFAULT NULL,
-    `language` varchar(50) DEFAULT NULL,
-    `subtitles` varchar(50) DEFAULT NULL,
-    `publicationDate` date DEFAULT NULL,
-    `genres` varchar(50) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                                  `discFormat` varchar(50) DEFAULT NULL,
+                                                  `director` varchar(50) DEFAULT NULL,
+                                                  `runTime` time DEFAULT NULL,
+                                                  `studio` varchar(50) DEFAULT NULL,
+                                                  `language` varchar(50) DEFAULT NULL,
+                                                  `subtitles` varchar(50) DEFAULT NULL,
+                                                  `publicationDate` date DEFAULT NULL,
+                                                  `genres` varchar(50) DEFAULT NULL,
+                                                  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `long_play_record`
@@ -584,13 +620,13 @@ INSERT INTO `long_play_record` (`id`, `discFormat`, `director`, `runTime`, `stud
 
 CREATE TABLE IF NOT EXISTS `media` (
                                        `id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(100) DEFAULT NULL,
-    `category` varchar(50) DEFAULT NULL,
-    `value` int(11) DEFAULT NULL,
-    `price` int(11) DEFAULT NULL,
-    `quantity` int(11) DEFAULT NULL,
-    PRIMARY KEY (`id`)
-    ) ENGINE=InnoDB AUTO_INCREMENT=602 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                       `title` varchar(100) DEFAULT NULL,
+                                       `category` varchar(50) DEFAULT NULL,
+                                       `value` int(11) DEFAULT NULL,
+                                       `price` int(11) DEFAULT NULL,
+                                       `quantity` int(11) DEFAULT NULL,
+                                       PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=602 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `media`
@@ -1207,12 +1243,12 @@ INSERT INTO `media` (`id`, `title`, `category`, `value`, `price`, `quantity`) VA
 
 CREATE TABLE IF NOT EXISTS `medias_in_order` (
                                                  `order_id` int(11) NOT NULL,
-    `media_id` int(11) NOT NULL,
-    `quantity` int(11) DEFAULT NULL,
-    `is_rush` int(11) DEFAULT NULL,
-    PRIMARY KEY (`order_id`,`media_id`),
-    KEY `FK_OrderMedia_Media` (`media_id`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                                 `media_id` int(11) NOT NULL,
+                                                 `quantity` int(11) DEFAULT NULL,
+                                                 `is_rush` int(11) DEFAULT NULL,
+                                                 PRIMARY KEY (`order_id`,`media_id`),
+                                                 KEY `FK_OrderMedia_Media` (`media_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1221,13 +1257,22 @@ CREATE TABLE IF NOT EXISTS `medias_in_order` (
 --
 
 CREATE TABLE IF NOT EXISTS `payment_info` (
-                                              `transactionId` varchar(100) NOT NULL,
-    `cardOwner` varchar(100) DEFAULT NULL,
-    `balanceChange` double DEFAULT NULL,
-    `transactionMessage` varchar(100) DEFAULT NULL,
-    `transactionTime` datetime DEFAULT NULL,
-    PRIMARY KEY (`transactionId`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+                                              `id` int(11) NOT NULL AUTO_INCREMENT,
+                                              `transactionId` varchar(100) DEFAULT NULL,
+                                              `cardOwner` varchar(100) DEFAULT NULL,
+                                              `balanceChange` double DEFAULT NULL,
+                                              `transactionMessage` varchar(100) DEFAULT NULL,
+                                              `transactionTime` datetime DEFAULT NULL,
+                                              PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payment_info`
+--
+
+INSERT INTO `payment_info` (`id`, `transactionId`, `cardOwner`, `balanceChange`, `transactionMessage`, `transactionTime`) VALUES
+                                                                                                                              (1, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (2, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
@@ -1238,7 +1283,7 @@ CREATE TABLE IF NOT EXISTS `payment_info` (
 --
 ALTER TABLE `aims_order`
     ADD CONSTRAINT `FK_Order_DeliveryInfo` FOREIGN KEY (`deliveryInfoId`) REFERENCES `delivery_info` (`id`),
-  ADD CONSTRAINT `FK_Order_Payment` FOREIGN KEY (`paymentInfoId`) REFERENCES `payment_info` (`transactionId`);
+    ADD CONSTRAINT `FK_Order_Payment` FOREIGN KEY (`paymentInfoId`) REFERENCES `payment_info` (`id`);
 
 --
 -- Constraints for table `book`
@@ -1275,7 +1320,7 @@ ALTER TABLE `long_play_record`
 --
 ALTER TABLE `medias_in_order`
     ADD CONSTRAINT `FK_OrderMedia_Media` FOREIGN KEY (`media_id`) REFERENCES `media` (`id`),
-  ADD CONSTRAINT `FK_OrderMedia_Order` FOREIGN KEY (`order_id`) REFERENCES `aims_order` (`id`);
+    ADD CONSTRAINT `FK_OrderMedia_Order` FOREIGN KEY (`order_id`) REFERENCES `aims_order` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

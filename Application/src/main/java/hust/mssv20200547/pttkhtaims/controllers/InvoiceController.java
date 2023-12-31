@@ -2,10 +2,13 @@ package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
 import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
+import hust.mssv20200547.pttkhtaims.models.Invoice;
 import hust.mssv20200547.pttkhtaims.models.Order;
 import hust.mssv20200547.pttkhtaims.services.IPlaceOrderService;
 import hust.mssv20200547.pttkhtaims.services.PlaceOrderService;
-import hust.mssv20200547.pttkhtaims.views.MediaInSquareView;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
+import hust.mssv20200547.pttkhtaims.views.MediaInVerticalView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -42,15 +45,16 @@ public class InvoiceController implements Initializable {
     @FXML
     private VBox vboxItems;
 
-    private DeliveryInfo deliveryInfo;
+    private Invoice invoice;
     private IPlaceOrderService placeOrderService = new PlaceOrderService();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void setDeliveryInfo(DeliveryInfo deliveryInfo) throws IOException {
-        this.deliveryInfo = deliveryInfo;
+    public void setDefaultValues(DeliveryInfo deliveryInfo, Invoice invoice) throws IOException {
+        this.invoice = invoice;
+
         this.labelAddress.setText(deliveryInfo.getDetailedAddress());
         this.labelName.setText(deliveryInfo.getReceiver());
         this.labelCity.setText(deliveryInfo.getCityAddress());
@@ -71,10 +75,22 @@ public class InvoiceController implements Initializable {
         itemViews.clear();
 
         for (var mediaEntry : order.getMediaInOrder().entrySet()) {
-            var mediaView = new MediaInSquareView();
-            MediaInSquareController mediaController = mediaView.getController();
-            mediaController.setMedia(mediaEntry);
+            var mediaView = new MediaInVerticalView();
+            var mediaController = mediaView.getController();
+            mediaController.setDefaultValues(mediaEntry);
             itemViews.add(mediaView.getRoot());
         }
+    }
+
+    @FXML
+    public void confirmInvoice() {
+        // wait for result
+        var root = this.labelAddress.getScene().getRoot();
+        root.setDisable(true);
+        PaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
+        root.setDisable(false);
+
+        // TODO: set Payment info in db
+
     }
 }

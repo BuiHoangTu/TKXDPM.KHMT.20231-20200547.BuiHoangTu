@@ -7,5 +7,5 @@ import java.util.Map;
 public class MediaInVerticalController {
 
 
-    public void setMedia(Map.Entry<Media, Long> m){}
+    public void setDefaultValues(Map.Entry<Media, Long> m){}
 }

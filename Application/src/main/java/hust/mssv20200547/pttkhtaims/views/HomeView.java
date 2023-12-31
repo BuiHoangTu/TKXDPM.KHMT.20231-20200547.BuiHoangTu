@@ -22,7 +22,7 @@ public class HomeView extends BaseView {
         super(PATH);
 
         HomeController controller = this.loader.getController();
-        controller.setMedias(MYSQL.searchMedias("category", "", 20));
+        controller.setDefaultValues(MYSQL.searchMedias("category", "", 20));
     }
 
     @Override
