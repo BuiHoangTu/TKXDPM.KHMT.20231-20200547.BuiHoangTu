@@ -31,7 +31,7 @@ public class CartController implements Initializable {
     private Label labelVAT;
     @FXML
     private Label labelAmount;
-    // TODO one of these label is not bind to right elems 
+    // TODO one of these label is not bind to right elems
 
 
     @FXML
