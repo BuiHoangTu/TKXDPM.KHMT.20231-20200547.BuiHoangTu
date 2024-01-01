@@ -2,7 +2,6 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -54,6 +53,26 @@ public class VnPayConfig {
         return digest;
     }
 
+    //Util for VNPAY
+    public static String hashAllFields(Map<String, String> fields) {
+        List<String> sortedFieldNames = fields.keySet().stream().sorted().toList();
+        StringBuilder sb = new StringBuilder();
+        Iterator<String> itr = sortedFieldNames.iterator();
+        while (itr.hasNext()) {
+            String fieldName = itr.next();
+            String fieldValue = fields.get(fieldName);
+            if ((fieldValue != null) && (!fieldValue.isEmpty())) {
+                sb.append(fieldName);
+                sb.append("=");
+                sb.append(fieldValue);
+            }
+            if (itr.hasNext()) {
+                sb.append("&");
+            }
+        }
+        return hmacSHA512(SECRET_KEY, sb.toString());
+    }
+
     public static String hmacSHA512(final String key, final String data) {
         try {
 
@@ -75,15 +94,5 @@ public class VnPayConfig {
         } catch (Exception ex) {
             return "";
         }
-    }
-
-    public static String getRandomNumber(int len) {
-        Random rnd = new Random();
-        String chars = "0123456789";
-        StringBuilder sb = new StringBuilder(len);
-        for (int i = 0; i < len; i++) {
-            sb.append(chars.charAt(rnd.nextInt(chars.length())));
-        }
-        return sb.toString();
     }
 }

@@ -6,6 +6,7 @@ import hust.mssv20200547.pttkhtaims.models.Invoice;
 import hust.mssv20200547.pttkhtaims.models.Order;
 import hust.mssv20200547.pttkhtaims.services.IPlaceOrderService;
 import hust.mssv20200547.pttkhtaims.services.PlaceOrderService;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
 import hust.mssv20200547.pttkhtaims.views.MediaInVerticalView;
@@ -87,10 +88,24 @@ public class InvoiceController implements Initializable {
         // wait for result
         var root = this.labelAddress.getScene().getRoot();
         root.setDisable(true);
-        PaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
-        root.setDisable(false);
+        try {
+            PaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
+            // TODO: set Payment info in db
 
-        // TODO: set Payment info in db
+        } catch (AnonymousTransactionException e) {
+            throw new RuntimeException(e);
+        } catch (UnrecognizedException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionNotDoneException e) {
+            throw new RuntimeException(e);
+        } catch (ClientBankException e) {
+            throw new RuntimeException(e);
+        } catch (TransactionFailedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            root.setDisable(false);
+        }
+
 
     }
 }

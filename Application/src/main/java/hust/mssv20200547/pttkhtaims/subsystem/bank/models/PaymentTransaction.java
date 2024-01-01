@@ -10,14 +10,16 @@ public class PaymentTransaction {
     private final String errorCode;
     private final String transactionContent;
     private final int amount;
-    private Integer orderID;
+    //    private Integer orderID;
     private final Date createdAt;
 
-    public PaymentTransaction(String errorCode, String transactionId, String transactionContent,
-                              int amount, Date createdAt) {
+    public PaymentTransaction(
+            String errorCode,
+            String transactionId,
+            String transactionContent,
+            int amount,
+            Date createdAt) {
         this.errorCode = errorCode;
-
-
         this.transactionId = transactionId;
         this.transactionContent = transactionContent;
         this.amount = amount;

@@ -2,6 +2,7 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
 
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IBank;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IInvoice;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay.PayView;
 
@@ -15,19 +16,35 @@ import java.util.*;
 
 public class VnPay implements IBank {
     @Override
-    public PaymentTransaction makePaymentTransaction(IInvoice invoice, String contents) {
-        try {
-            String payUrl = this.generatePayOrderUrl(invoice, contents);
-            // create entries URL
-            new PayView(payUrl);
+    public PaymentTransaction makePaymentTransaction(
+            IInvoice invoice,
+            String contents
+    ) throws
+            TransactionFailedException,
+            AnonymousTransactionException,
+            UnrecognizedException,
+            TransactionNotDoneException,
+            ClientBankException {
+        String payUrl = this.generatePayOrderUrl(invoice, contents);
 
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+        // start new view
+        var payView = new PayView(payUrl);
+
+        // this show and wait till close
+        PaymentTransaction paymentTransaction = payView.showThenGetPaymentTransaction();
+
+        if (paymentTransaction == null) throw new TransactionNotDoneException();
+
+        return switch (paymentTransaction.getErrorCode()) {
+            case "00" -> paymentTransaction;
+            case "07" -> throw new AnonymousTransactionException();
+            case "09", "10", "11", "12", "13", "24", "51", "65", "79" -> throw new TransactionFailedException();
+            case "75" -> throw new ClientBankException();
+            default -> throw new UnrecognizedException();
+        };
     }
 
-    public String generatePayOrderUrl(IInvoice invoice, String contents) {
+    private String generatePayOrderUrl(IInvoice invoice, String contents) {
         long vnpAmount = invoice.getTotalFee() * 100 * 1000;
 
         Map<String, String> vnp_Params = new HashMap<>();
@@ -87,7 +104,7 @@ public class VnPay implements IBank {
     }
 
     private String getIpAddress() {
-        try(final DatagramSocket socket = new DatagramSocket()){
+        try (final DatagramSocket socket = new DatagramSocket()) {
             socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
             return socket.getLocalAddress().getHostAddress();
         } catch (IOException e) {
