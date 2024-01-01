@@ -12,4 +12,6 @@ public interface IMediaSource {
     <M extends Media> M getMediaDetail(M media) throws SQLException;
 
     Map<Media, Long> searchMedias(String searchType, String searchValue, int quantity) throws SQLException;
+
+    void reduceMedias(Map<Media, Long> medias) throws SQLException;
 }

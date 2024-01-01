@@ -200,6 +200,9 @@ public class MediaSourceMySql extends MysqlBase implements IMediaSource {
 
     }
 
+    public void reduceMedias(Map<Media, Long> medias) {
+
+    }
 
     @SuppressWarnings("all")
     private static class ResultSetColIterator {

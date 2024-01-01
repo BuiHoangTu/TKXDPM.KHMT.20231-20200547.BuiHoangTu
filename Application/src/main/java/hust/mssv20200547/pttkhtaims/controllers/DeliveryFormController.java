@@ -1,19 +1,10 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
-import hust.mssv20200547.pttkhtaims.database.IDeliveryInfoSource;
-import hust.mssv20200547.pttkhtaims.database.IInvoiceSource;
-import hust.mssv20200547.pttkhtaims.database.IOrderSource;
-import hust.mssv20200547.pttkhtaims.database.IPaymentInfoSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.DeliveryInfoSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.InvoiceSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.OrderSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.PaymentInfoSource;
-import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
-import hust.mssv20200547.pttkhtaims.models.Order;
+import hust.mssv20200547.pttkhtaims.exceptions.service.order.NameFormatException;
+import hust.mssv20200547.pttkhtaims.exceptions.service.order.PhoneNumberFormatException;
 import hust.mssv20200547.pttkhtaims.services.IPlaceOrderService;
 import hust.mssv20200547.pttkhtaims.services.PlaceOrderService;
-import hust.mssv20200547.pttkhtaims.models.Invoice;
 import hust.mssv20200547.pttkhtaims.views.BaseView;
 import hust.mssv20200547.pttkhtaims.views.InvoiceView;
 import javafx.fxml.FXML;
@@ -56,11 +47,7 @@ public class DeliveryFormController implements Initializable {
     @FXML
     private Label errorProvince;
 
-    private IPlaceOrderService placeOrderService = new PlaceOrderService();
-    private IDeliveryInfoSource deliveryInfoSource = new DeliveryInfoSource();
-    private IOrderSource orderSource = new OrderSource();
-    private IPaymentInfoSource paymentInfoSource = new PaymentInfoSource();
-    private IInvoiceSource invoiceSource = new InvoiceSource();
+    private final IPlaceOrderService placeOrderService = new PlaceOrderService();
 
     @FXML
     private void goBackPage() {
@@ -75,28 +62,21 @@ public class DeliveryFormController implements Initializable {
         var detailAddr = this.tfDetailAddress.getText();
         var ins = this.tfInstruction.getText();
 
-        if (! placeOrderService.validateName(receiver)) return;
-        if (! placeOrderService.validatePhoneNumber(phone)) return;
+        // use order service
+        try {
+            var order = placeOrderService.createOrder(receiver, phone, email, city, detailAddr, ins);
 
-        DeliveryInfo deliveryInfo = new DeliveryInfo(receiver, phone, email, city, detailAddr, ins);
-        long totalPrice = AIMS.cart.totalPrice();
-        Order order = new Order(AIMS.cart, deliveryInfo);
+            long deliveryFee = placeOrderService.calculateDeliveryFee(order);
+            long totalPrice = AIMS.cart.totalPrice();
+            var invoice = placeOrderService.createInvoice(totalPrice, deliveryFee, order.getOrderId());
 
-        // create in db
-        int deliveryId = this.deliveryInfoSource.saveDeliveryInfo(deliveryInfo);
-        int paymentId = this.paymentInfoSource.createHolder();
-        int orderId = this.orderSource.saveOrder(paymentId, deliveryId);
+            var invoiceView = new InvoiceView();
+            invoiceView.getController().setDefaultValues(order, invoice);
+            invoiceView.apply((Stage) tfReceiver.getScene().getWindow());
 
-        long deliveryFee = placeOrderService.calculateDeliveryFee(order);
-        Invoice invoice = new Invoice(totalPrice, deliveryFee);
-        invoice.setOrderId(orderId);
-
-        // TODO: save to db
-        this.invoiceSource.saveInvoice(invoice);
-
-        var invoiceView = new InvoiceView();
-        invoiceView.getController().setDefaultValues(deliveryInfo, invoice);
-        invoiceView.apply((Stage) tfReceiver.getScene().getWindow());
+        } catch (NameFormatException | PhoneNumberFormatException ignored) {
+            // ignore submit, maybe add pop-up
+        }
     }
 
     public void setPrevPage(BaseView view) {

@@ -47,14 +47,16 @@ public class InvoiceController implements Initializable {
     private VBox vboxItems;
 
     private Invoice invoice;
-    private IPlaceOrderService placeOrderService = new PlaceOrderService();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
 
-    public void setDefaultValues(DeliveryInfo deliveryInfo, Invoice invoice) throws IOException {
+    public void setDefaultValues(Order order, Invoice invoice) throws IOException {
         this.invoice = invoice;
+
+        var deliveryInfo = order.getDeliveryInfo();
 
         this.labelAddress.setText(deliveryInfo.getDetailedAddress());
         this.labelName.setText(deliveryInfo.getReceiver());
@@ -62,14 +64,13 @@ public class InvoiceController implements Initializable {
         this.labelPhone.setText(deliveryInfo.getPhoneNumber());
         this.labelShipInstruction.setText(deliveryInfo.getInstruction());
 
-        long subTotal = AIMS.cart.totalPrice();
+        long subTotal = invoice.getPriceNoVat();
         this.labelSubTotal.setText(String.valueOf(subTotal));
 
-        Order order = new Order(AIMS.cart, deliveryInfo);
-        long deliveryFee = placeOrderService.calculateDeliveryFee(order);
+        long deliveryFee = invoice.getDeliveryFee();
         this.labelShipFee.setText(String.valueOf(deliveryFee));
 
-        this.labelTotal.setText(String.valueOf(subTotal + deliveryFee));
+        this.labelTotal.setText(String.valueOf(invoice.getTotalFee()));
 
         // setup view
         List<Node> itemViews = vboxItems.getChildren();

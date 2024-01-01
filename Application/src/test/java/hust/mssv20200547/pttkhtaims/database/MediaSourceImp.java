@@ -49,4 +49,9 @@ public class MediaSourceImp implements IMediaSource {
     public Map<Media, Long> searchMedias(String searchType, String searchValue, int quantity) throws SQLException {
         return null;
     }
+
+    @Override
+    public void reduceMedias(Map<Media, Long> medias) throws SQLException {
+
+    }
 }
