@@ -4,14 +4,14 @@ import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPayConfig;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
-import javafx.stage.Stage;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,13 +58,13 @@ public class PayView {
                 int amount = Integer.parseInt((String) params.get("vnp_Amount")) / 100;
 
                 String createdAt = params.get("vnp_PayDate");
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-                Date date = dateFormat.parse(createdAt);
+                DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                LocalDateTime createdDateTime = LocalDateTime.parse(createdAt, dateFormat);
 
-                this.transaction = new PaymentTransaction(errorCode, transactionId, transactionContent, amount, date);
+                this.transaction = new PaymentTransaction(errorCode, transactionId, transactionContent, amount, createdDateTime);
 
                 vnPayStage.close();
-            } catch (URISyntaxException | ParseException e) {
+            } catch (URISyntaxException | DateTimeParseException e) {
                 // shouldnt have error
                 System.out.println(e.toString());
             }

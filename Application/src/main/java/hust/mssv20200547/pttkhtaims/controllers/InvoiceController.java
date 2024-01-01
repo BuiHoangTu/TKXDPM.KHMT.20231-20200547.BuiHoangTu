@@ -1,11 +1,9 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
-import hust.mssv20200547.pttkhtaims.AIMS;
-import hust.mssv20200547.pttkhtaims.models.DeliveryInfo;
 import hust.mssv20200547.pttkhtaims.models.Invoice;
 import hust.mssv20200547.pttkhtaims.models.Order;
-import hust.mssv20200547.pttkhtaims.services.IPlaceOrderService;
-import hust.mssv20200547.pttkhtaims.services.PlaceOrderService;
+import hust.mssv20200547.pttkhtaims.services.IPayOrderService;
+import hust.mssv20200547.pttkhtaims.services.PayOrderService;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
@@ -13,12 +11,14 @@ import hust.mssv20200547.pttkhtaims.views.MediaInVerticalView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -45,6 +45,8 @@ public class InvoiceController implements Initializable {
     private ScrollPane vboxIte;
     @FXML
     private VBox vboxItems;
+
+    private final IPayOrderService payOrderService = new PayOrderService();
 
     private Invoice invoice;
 
@@ -91,18 +93,22 @@ public class InvoiceController implements Initializable {
         root.setDisable(true);
         try {
             PaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
-            // TODO: set Payment info in db
 
-        } catch (AnonymousTransactionException e) {
-            throw new RuntimeException(e);
-        } catch (UnrecognizedException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionNotDoneException e) {
-            throw new RuntimeException(e);
-        } catch (ClientBankException e) {
-            throw new RuntimeException(e);
-        } catch (TransactionFailedException e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Success");
+            alert.setContentText(res.getTransactionContent());
+            alert.showAndWait();
+
+            payOrderService.savePaymentTransaction(res);
+        } catch (AnonymousTransactionException | UnrecognizedException | TransactionNotDoneException | ClientBankException | TransactionFailedException e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Failed");
+            alert.setHeaderText("Reason");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (SQLException ignore) {
+
         } finally {
             root.setDisable(false);
         }
