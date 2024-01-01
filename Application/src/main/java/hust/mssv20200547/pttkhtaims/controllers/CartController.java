@@ -31,6 +31,7 @@ public class CartController implements Initializable {
     private Label labelVAT;
     @FXML
     private Label labelAmount;
+    // TODO one of these label is not bind to right elems 
 
 
     @FXML
@@ -54,5 +55,10 @@ public class CartController implements Initializable {
             mediaController.setDefaultValues(mediaEntry);
             medias.add(mediaView.getRoot());
         }
+
+        long subtotal = cart.totalPrice();
+        this.labelSubtotal.setText(String.valueOf(subtotal));
+        this.labelVAT.setText(String.valueOf(subtotal / 10));
+        this.labelAmount.setText(String.valueOf(subtotal * 110 / 100));
     }
 }

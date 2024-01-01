@@ -2,10 +2,7 @@ package hust.mssv20200547.pttkhtaims.services;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
 import hust.mssv20200547.pttkhtaims.database.*;
-import hust.mssv20200547.pttkhtaims.database.mysql.DeliveryInfoSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.InvoiceSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.OrderSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.PaymentInfoSource;
+import hust.mssv20200547.pttkhtaims.database.mysql.*;
 import hust.mssv20200547.pttkhtaims.exceptions.service.order.NameFormatException;
 import hust.mssv20200547.pttkhtaims.exceptions.service.order.PhoneNumberFormatException;
 import hust.mssv20200547.pttkhtaims.models.*;
@@ -20,6 +17,7 @@ public class PlaceOrderService implements IPlaceOrderService {
     private final IOrderSource orderSource = new OrderSource();
     private final IPaymentInfoSource paymentInfoSource = new PaymentInfoSource();
     private final IInvoiceSource invoiceSource = new InvoiceSource();
+    private final IMediaSource mediaSource = new MediaSourceMySql();
 
     @Override
     public boolean validatePhoneNumber(String phoneNumber) {
@@ -66,19 +64,34 @@ public class PlaceOrderService implements IPlaceOrderService {
     }
 
     @Override
-    public Order createOrder(String receiver, String phone, String email, String city, String detailAddr, String ins) throws SQLException, NameFormatException, PhoneNumberFormatException {
+    public Order createOrder(
+            String receiver,
+            String phone,
+            String email,
+            String city,
+            String detailAddr,
+            String ins
+    ) throws
+            SQLException,
+            NameFormatException,
+            PhoneNumberFormatException
+    {
         if (! this.validateName(receiver)) throw new NameFormatException();
         if (! this.validatePhoneNumber(phone)) throw new PhoneNumberFormatException();
 
         DeliveryInfo deliveryInfo = new DeliveryInfo(receiver, phone, email, city, detailAddr, ins);
         Order order = new Order(AIMS.cart, deliveryInfo);
+        AIMS.cart.clear();
 
         // create in db
         int deliveryId = this.deliveryInfoSource.saveDeliveryInfo(deliveryInfo);
         int paymentId = this.paymentInfoSource.createHolder();
-        int orderId = this.orderSource.saveOrder(paymentId, deliveryId);
-
+        int orderId = this.orderSource.saveOrder(paymentId, deliveryId, order);
         order.setOrderId(orderId);
+
+        // rm media from store
+        mediaSource.reduceMedias(order.getMediaInOrder());
+
         return order;
     }
 

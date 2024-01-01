@@ -9,8 +9,10 @@ import java.sql.Statement;
 
 public class OrderSource extends MysqlBase implements IOrderSource {
     @Override
-    public int saveOrder(int paymentInfoId, int deliveryInfoId) throws SQLException {
+    public int saveOrder(int paymentInfoId, int deliveryInfoId, Order order) throws SQLException {
         var mysql = getConnection();
+
+        // save to aims order
         var prepareStm = mysql.prepareStatement(
                 "INSERT INTO aims_order(paymentInfoId, deliveryInfoId, orderStatus) " +
                         "values (?, ?, ?)",
@@ -29,10 +31,29 @@ public class OrderSource extends MysqlBase implements IOrderSource {
         }
 
         try (ResultSet generatedKeys = prepareStm.getGeneratedKeys()) {
-            if (generatedKeys.next()) {
-                return (generatedKeys.getInt(1));
-            } else {
+            if (!generatedKeys.next()) {
                 throw new SQLException("No ID obtained.");
+            } else {
+                int orderId = (generatedKeys.getInt(1));
+                order.setOrderId(orderId);
+
+                if (!order.getMediaInOrder().isEmpty()) {
+                    var prepareStmMIO = mysql.prepareStatement(
+                            "INSERT INTO medias_in_order(order_id, media_id, quantity) " +
+                                    "values (?, ?, ?)"
+                    );
+                    for (var entry : order.getMediaInOrder().entrySet()) {
+                        var media = entry.getKey();
+                        prepareStmMIO.setInt(1, orderId);
+                        prepareStmMIO.setLong(2, media.getId());
+                        prepareStmMIO.setLong(3, entry.getValue());
+                        prepareStmMIO.addBatch();
+                    }
+
+                    prepareStmMIO.executeBatch();
+                }
+
+                return orderId;
             }
         }
     }

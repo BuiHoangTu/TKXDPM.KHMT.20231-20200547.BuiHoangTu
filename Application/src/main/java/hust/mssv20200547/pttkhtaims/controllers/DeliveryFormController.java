@@ -64,10 +64,11 @@ public class DeliveryFormController implements Initializable {
 
         // use order service
         try {
-            var order = placeOrderService.createOrder(receiver, phone, email, city, detailAddr, ins);
-
-            long deliveryFee = placeOrderService.calculateDeliveryFee(order);
             long totalPrice = AIMS.cart.totalPrice();
+
+            var order = placeOrderService.createOrder(receiver, phone, email, city, detailAddr, ins);
+            long deliveryFee = placeOrderService.calculateDeliveryFee(order);
+
             var invoice = placeOrderService.createInvoice(totalPrice, deliveryFee, order.getOrderId());
 
             var invoiceView = new InvoiceView();

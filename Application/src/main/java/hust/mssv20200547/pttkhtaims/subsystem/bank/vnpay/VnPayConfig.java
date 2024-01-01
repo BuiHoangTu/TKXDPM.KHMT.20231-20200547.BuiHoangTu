@@ -15,8 +15,8 @@ public class VnPayConfig {
     public static final String ORDER_TYPE = "other";
     public static final String PAY_URL = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static final String RETURN_URL = "https://sandbox.vnpayment.vn/tryitnow/Home/VnPayReturn";
-    public static final String TMN_CODE = "TXOOZNX4";
-    public static final String SECRET_KEY = "HUQHTRVXVRGJJWHMBFCAUBAXOSAJBIND";
+    public static final String TMN_CODE = "QKQ5X1FM";
+    public static final String SECRET_KEY = "RKOWDYMENIOIMCNJSMYZZWZTVYKLUUBC";
     public static final String API_URL = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
     public static final String TIME_FORMAT = "yyyyMMddHHmmss";
     public static final String TIME_SECTOR = "Etc/GMT+7";
