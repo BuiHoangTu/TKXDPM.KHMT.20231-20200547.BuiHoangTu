@@ -10,7 +10,6 @@ import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 import hust.mssv20200547.pttkhtaims.views.PaymentInfo;
 
 import java.sql.SQLException;
-import java.util.regex.Pattern;
 
 public class PayOrderService implements IPayOrderService {
     private final IPaymentInfoSource paymentInfoSource = new PaymentInfoSource();

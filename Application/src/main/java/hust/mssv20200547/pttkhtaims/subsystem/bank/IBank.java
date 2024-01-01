@@ -8,11 +8,5 @@ public interface IBank {
             IInvoice invoice,
             String contents
     ) throws
-            AnonymousTransactionException,
-            ClientBankException,
-            TransactionFailedException,
-            TransactionNotDoneException,
-            TransactionReverseException,
-            UnrecognizedException,
             PaymentException;
 }

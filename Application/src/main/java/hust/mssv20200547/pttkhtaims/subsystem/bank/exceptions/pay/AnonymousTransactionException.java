@@ -1,7 +1,5 @@
 package hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay;
 
-import java.io.Serial;
-
 /**
  * Error 07
  */

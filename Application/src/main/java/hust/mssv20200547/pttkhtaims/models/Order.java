@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
@@ -14,13 +12,13 @@ import java.util.Map;
 @Getter
 @Setter
 public class Order {
+    @Getter
     public enum OrderStatus {
         NOT_PAID (1),
         PAID_SHIPPING (2),
         DELIVERED (3),
         CANCELED (4);
 
-        @Getter
         private final int i;
         OrderStatus(int i) {
             this.i = i;
@@ -34,6 +32,8 @@ public class Order {
 
     public Order(Cart currentCart, DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
+        this.orderStatus = OrderStatus.NOT_PAID;
+
         mediaInOrder.putAll(currentCart);
     }
 }

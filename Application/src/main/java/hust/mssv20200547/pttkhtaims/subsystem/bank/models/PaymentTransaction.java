@@ -3,7 +3,6 @@ package hust.mssv20200547.pttkhtaims.subsystem.bank.models;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Getter
 public class PaymentTransaction {
