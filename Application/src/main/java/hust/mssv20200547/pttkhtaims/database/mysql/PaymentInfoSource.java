@@ -1,7 +1,7 @@
 package hust.mssv20200547.pttkhtaims.database.mysql;
 
 import hust.mssv20200547.pttkhtaims.database.IPaymentInfoSource;
-import hust.mssv20200547.pttkhtaims.views.PaymentInfo;
+import hust.mssv20200547.pttkhtaims.models.PaymentInfo;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

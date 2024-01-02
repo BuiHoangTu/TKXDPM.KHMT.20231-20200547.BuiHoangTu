@@ -1,4 +1,4 @@
-package hust.mssv20200547.pttkhtaims.views;
+package hust.mssv20200547.pttkhtaims.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
