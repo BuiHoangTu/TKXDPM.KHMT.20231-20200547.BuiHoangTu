@@ -1,13 +1,12 @@
 package hust.mssv20200547.pttkhtaims.controllers;
 
 import hust.mssv20200547.pttkhtaims.AIMS;
-import hust.mssv20200547.pttkhtaims.database.IMediaSource;
-import hust.mssv20200547.pttkhtaims.database.mysql.MediaSourceMySql;
 import hust.mssv20200547.pttkhtaims.models.Media;
+import hust.mssv20200547.pttkhtaims.services.IStoreService;
+import hust.mssv20200547.pttkhtaims.services.StoreService;
 import hust.mssv20200547.pttkhtaims.views.CartView;
 import hust.mssv20200547.pttkhtaims.views.MediaInSquareView;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -19,12 +18,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Map;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
-    private static final IMediaSource MYSQL = new MediaSourceMySql();
+    private static final int MAX_MEDIAS_VIEW = 20;
+
+    private final IStoreService storeService = new StoreService();
 
     @FXML
     private RadioMenuItem radioMenuItemTitle;
@@ -58,39 +58,41 @@ public class HomeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         this.numMediaInCart.setText(String.valueOf(0));
 
-        this.cartImage.addEventHandler(EventType.ROOT, event -> {
-
-        });
+        this.setDefaultValues(this.storeService.recommendedMedias(MAX_MEDIAS_VIEW));
     }
 
-    public void setDefaultValues(Map<Media, Long> medias) throws IOException {
+    private void setDefaultValues(Map<Media, Long> medias) {
         var mediaEntries = medias.entrySet().stream().toList();
         var vBoxes = new VBoxNext(vBoxMedia1, vBoxMedia2, vBoxMedia3, vBoxMedia4);
         vBoxes.clearAll();
 
         for (var mediaEntry : mediaEntries) {
-            var mediaView = new MediaInSquareView();
-            MediaInSquareController mediaController = mediaView.getController();
-            mediaController.setDefaultValues(mediaEntry);
-            vBoxes.next().getChildren().add(mediaView.getRoot());
+            try {
+                var mediaView = new MediaInSquareView();
+                MediaInSquareController mediaController = mediaView.getController();
+                mediaController.setDefaultValues(mediaEntry);
+                vBoxes.next().getChildren().add(mediaView.getRoot());
+            } catch (IOException e) {
+                continue;
+            }
         }
     }
 
     @FXML
-    private void searchMedias(ActionEvent ignoredEvent) throws SQLException, IOException {
+    private void searchMedias(ActionEvent ignoredEvent) {
         var selected = this.searchType.getSelectedToggle();
 
         if (selected == this.radioMenuItemTitle) {
-            this.setDefaultValues(MYSQL.searchMedias("title", this.textFieldSearch.getText(), 20));
+            this.setDefaultValues(storeService.searchMediaTitleInStore(this.textFieldSearch.getText(), MAX_MEDIAS_VIEW));
         }
 
         if (selected == this.radioMenuItemCategory) {
-            this.setDefaultValues(MYSQL.searchMedias("category", this.textFieldSearch.getText(), 20));
+            this.setDefaultValues(storeService.searchMediaCategoryInStore(this.textFieldSearch.getText(), MAX_MEDIAS_VIEW));
         }
     }
 
     @FXML
-    public void openCart(MouseEvent mouseEvent) throws IOException {
+    public void openCart(MouseEvent ignoredMouseEvent) throws IOException {
         var cartView = new CartView();
 
         cartView.apply((Stage) cartImage.getScene().getWindow());

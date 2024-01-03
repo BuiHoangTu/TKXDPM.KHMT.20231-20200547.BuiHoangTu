@@ -150,7 +150,17 @@ public class MediaSourceMySql extends MysqlBase implements IMediaSource {
     }
 
     @Override
-    public Map<Media, Long> searchMedias(String searchType, String searchValue, int resQuantity) throws SQLException {
+    public Map<Media, Long> searchMediaTitleInStore(String title, int limit) throws SQLException {
+        return this.searchMedias("title", title, limit);
+    }
+
+    @Override
+    public Map<Media, Long> searchMediaCategoryInStore(String category, int limit) throws SQLException {
+        return this.searchMedias("category", category, limit);
+    }
+
+
+    private Map<Media, Long> searchMedias(String searchType, String searchValue, int resQuantity) throws SQLException {
         LOGGER_MY_SQL_AIMS.info("Search {}: {}", searchType, searchValue);
 
         var mysql = getConnection();
@@ -200,8 +210,20 @@ public class MediaSourceMySql extends MysqlBase implements IMediaSource {
 
     }
 
-    public void reduceMedias(Map<Media, Long> medias) {
+    @Override
+    public void reduceMedias(Map<Media, Long> medias) throws SQLException {
+        if (medias.isEmpty()) return;
 
+        var mysql = getConnection();
+        var prepareStm = mysql.prepareStatement("UPDATE media SET quantity = quantity - ? WHERE id = ?");
+
+        for (var entry : medias.entrySet()) {
+            prepareStm.setLong(1, entry.getValue());
+            prepareStm.setLong(2, entry.getKey().getId());
+            prepareStm.addBatch();
+        }
+
+        prepareStm.executeBatch();
     }
 
     @SuppressWarnings("all")
