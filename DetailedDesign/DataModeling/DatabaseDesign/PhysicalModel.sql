@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2023 at 04:41 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 03, 2024 at 04:42 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `aims_order` (
                                             PRIMARY KEY (`id`),
                                             KEY `FK_Order_Payment` (`paymentInfoId`),
                                             KEY `FK_Order_DeliveryInfo` (`deliveryInfoId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `aims_order`
@@ -53,7 +53,13 @@ CREATE TABLE IF NOT EXISTS `aims_order` (
 
 INSERT INTO `aims_order` (`id`, `paymentInfoId`, `deliveryInfoId`, `orderStatus`) VALUES
                                                                                       (1, 1, 13, 1),
-                                                                                      (2, 2, 14, 1);
+                                                                                      (2, 2, 14, 1),
+                                                                                      (3, 3, 15, 1),
+                                                                                      (4, 4, 16, 1),
+                                                                                      (5, 5, 17, 1),
+                                                                                      (6, 6, 18, 1),
+                                                                                      (7, 7, 19, 1),
+                                                                                      (8, 8, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -315,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `delivery_info` (
                                                `cityAddress` varchar(50) DEFAULT NULL,
                                                `detailedAddress` varchar(50) DEFAULT NULL,
                                                PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `delivery_info`
@@ -335,7 +341,13 @@ INSERT INTO `delivery_info` (`id`, `receiver`, `phoneNumber`, `email`, `cityAddr
                                                                                                              (11, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
                                                                                                              (12, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
                                                                                                              (13, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
-                                                                                                             (14, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr');
+                                                                                                             (14, 'tu', '0913913505', 'mail', 'Ha Noi', 'addr'),
+                                                                                                             (15, 'hoang tu', '0913913555', 'mail', 'Ha Noi', 'Addr'),
+                                                                                                             (16, 'hoang tu', '0913555555', 'mail', 'city ', 'addr'),
+                                                                                                             (17, 'u', '0123456789', 'mail ', 'city', 'addr'),
+                                                                                                             (18, 'tu', '0123456789', 'mail', 'city', 'addr'),
+                                                                                                             (19, 'tu', '0123456789', 'mail', 'city', 'addr'),
+                                                                                                             (20, 'tu', '0123456789', 'mail', 'Ha Noi', 'addr');
 
 -- --------------------------------------------------------
 
@@ -477,7 +489,7 @@ CREATE TABLE IF NOT EXISTS `invoice` (
                                          `totalFee` double DEFAULT NULL,
                                          PRIMARY KEY (`id`),
                                          KEY `FK_Invoice_Order` (`orderId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `invoice`
@@ -485,7 +497,13 @@ CREATE TABLE IF NOT EXISTS `invoice` (
 
 INSERT INTO `invoice` (`id`, `orderId`, `priceNoVAT`, `priceWithVAT`, `deliveryFee`, `totalFee`) VALUES
                                                                                                      (1, 1, 92, 9, 0, 9),
-                                                                                                     (2, 2, 53, 5, 0, 5);
+                                                                                                     (2, 2, 53, 5, 0, 5),
+                                                                                                     (3, 3, 0, 0, 0, 0),
+                                                                                                     (4, 4, 0, 0, 0, 0),
+                                                                                                     (5, 5, 0, 0, 0, 0),
+                                                                                                     (6, 6, 0, 0, 0, 0),
+                                                                                                     (7, 7, 64, 6, 0, 6),
+                                                                                                     (8, 8, 954, 95, 0, 95);
 
 -- --------------------------------------------------------
 
@@ -1250,6 +1268,31 @@ CREATE TABLE IF NOT EXISTS `medias_in_order` (
                                                  KEY `FK_OrderMedia_Media` (`media_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `medias_in_order`
+--
+
+INSERT INTO `medias_in_order` (`order_id`, `media_id`, `quantity`, `is_rush`) VALUES
+                                                                                  (3, 2, 1, NULL),
+                                                                                  (3, 15, 3, NULL),
+                                                                                  (3, 19, 3, NULL),
+                                                                                  (4, 15, 6, NULL),
+                                                                                  (5, 11, 6, NULL),
+                                                                                  (5, 12, 6, NULL),
+                                                                                  (5, 13, 5, NULL),
+                                                                                  (5, 15, 6, NULL),
+                                                                                  (6, 12, 3, NULL),
+                                                                                  (6, 15, 3, NULL),
+                                                                                  (7, 12, 2, NULL),
+                                                                                  (7, 15, 3, NULL),
+                                                                                  (8, 11, 8, NULL),
+                                                                                  (8, 12, 9, NULL),
+                                                                                  (8, 13, 8, NULL),
+                                                                                  (8, 14, 10, NULL),
+                                                                                  (8, 15, 12, NULL),
+                                                                                  (8, 16, 11, NULL),
+                                                                                  (8, 19, 12, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -1264,7 +1307,7 @@ CREATE TABLE IF NOT EXISTS `payment_info` (
                                               `transactionMessage` varchar(100) DEFAULT NULL,
                                               `transactionTime` datetime DEFAULT NULL,
                                               PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `payment_info`
@@ -1272,7 +1315,13 @@ CREATE TABLE IF NOT EXISTS `payment_info` (
 
 INSERT INTO `payment_info` (`id`, `transactionId`, `cardOwner`, `balanceChange`, `transactionMessage`, `transactionTime`) VALUES
                                                                                                                               (1, NULL, NULL, NULL, NULL, NULL),
-                                                                                                                              (2, NULL, NULL, NULL, NULL, NULL);
+                                                                                                                              (2, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (3, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (4, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (5, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (6, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (7, NULL, NULL, NULL, NULL, NULL),
+                                                                                                                              (8, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Constraints for dumped tables
