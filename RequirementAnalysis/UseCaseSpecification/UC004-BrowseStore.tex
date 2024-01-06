@@ -1,0 +1,125 @@
+\documentclass[../UseCaseSpecification.tex]{subfiles}
+
+\begin{document}
+\begin{enumerate}
+    \item \textbf{Use case code}
+    \newline
+    UC003
+
+    \item \textbf{Brief Description}
+    \newline
+    This use case describes the interaction between users and the AIMS software and VNPay when the customer wishes to see medias in the store.
+
+    \item \textbf{Actors}
+    \begin{enumerate}
+        \item User
+    \end{enumerate}
+
+    \item \textbf{Preconditions}
+    \newline
+    No
+
+    \item \textbf{Basic Flow of Events}
+    \begin{enumerate}
+        \item The AIMS software shows items
+        \item User selects item's quantity 
+        \item AIMS puts item and its quantity to cart 
+        \item User selects "View Cart"
+        \item AIMS redirects user to "CartView"
+    \end{enumerate}
+
+    \item \textbf{Alternative flows}
+    {\bfseries Table Alternative flows of events for UC Place order}
+    \begin{flushleft}
+        \tablefirsthead{}
+        \tablehead{}
+        \tabletail{}
+        \tablelasttail{}
+        \begin{supertabular}{|m{0.85999995cm}|m{1.513cm}|m{3.148cm}|m{7.1200004cm}|m{1.98cm}|}
+            \hline
+            \textbf{No} &
+            \textbf{Location} &
+            \textbf{Condition} &
+            \textbf{Action} &
+            \textbf{Resume location}\\\hline
+            
+            \begin{enumerate}
+                \item ~
+            \end{enumerate} &
+            \foreignlanguage{english}{Step 2} &
+            \foreignlanguage{english}{User search item} &
+            \begin{itemize}
+                \item AIMS search items and display
+            \end{itemize}
+            &
+            Step 3\\\hline
+
+            \begin{enumerate}
+                \item ~
+            \end{enumerate} &
+            \foreignlanguage{english}{Step 2} &
+            \foreignlanguage{english}{User selects item} &
+            \begin{itemize}
+                \item AIMS shows items detail
+                \item User add this item quantity
+                \item User press return 
+            \end{itemize}
+            &
+            Step 1\\\hline
+            \end{supertabular}
+          \end{flushleft}
+
+    \item \textbf{Input data}
+          {\bfseries Table Input data of delivery information}
+          \begin{flushleft}
+              \tablefirsthead{}
+              \tablehead{}
+              \tabletail{}
+              \tablelasttail{}
+              \begin{supertabular}{|m{0.744cm}|m{2.181cm}|m{2.34cm}|m{2.181cm}|m{3.291cm}|m{4.086cm}|}
+                  \hline
+                  \foreignlanguage{english}{\textbf{No}} &
+                  \foreignlanguage{english}{\textbf{Data fields}} &
+                  \foreignlanguage{english}{\textbf{Description}} &
+                  \foreignlanguage{english}{\textbf{Mandatory}} &
+                  \foreignlanguage{english}{\textbf{Valid condition}} &
+                  \foreignlanguage{english}{\textbf{Example}}\\\hline
+                  \begin{enumerate}
+                      \item ~
+                  \end{enumerate}
+                  &
+                  \foreignlanguage{english}{Extra }Address &
+                  ~
+                  &
+                  Yes &
+                  ~
+                  &
+                  \foreignlanguage{english}{12/18 Dai Co Viet street, Hai Ba Trung district}\\\hline
+                  \begin{enumerate}
+                      \item ~
+                  \end{enumerate}
+                  &
+                  Shipping instructions &
+                  ~
+                  &
+                  \foreignlanguage{english}{No} &
+                  ~
+                  &
+                  \foreignlanguage{english}{Drive in for about 100m}\\\hline
+                  \begin{enumerate}
+                      \item ~
+                  \end{enumerate}
+                  &
+                  \foreignlanguage{english}{Receive time} &
+                  ~
+                  &
+                  \foreignlanguage{english}{Yes} &
+                  \foreignlanguage{english}{hh:mm} &
+                  \foreignlanguage{english}{13:34}\\\hline
+              \end{supertabular}
+          \end{flushleft}
+
+    \item \textbf{Output data}
+    \item \textbf{Post Condition }
+\end{enumerate}
+\end{document}
