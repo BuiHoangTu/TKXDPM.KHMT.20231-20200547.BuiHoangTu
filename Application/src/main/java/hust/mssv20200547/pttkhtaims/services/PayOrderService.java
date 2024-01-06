@@ -6,7 +6,7 @@ import hust.mssv20200547.pttkhtaims.database.mysql.OrderSource;
 import hust.mssv20200547.pttkhtaims.database.mysql.PaymentInfoSource;
 import hust.mssv20200547.pttkhtaims.models.Card;
 import hust.mssv20200547.pttkhtaims.models.Order;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IPaymentTransaction;
 import hust.mssv20200547.pttkhtaims.models.PaymentInfo;
 
 import java.sql.SQLException;
@@ -36,7 +36,7 @@ public class PayOrderService implements IPayOrderService {
     }
 
     @Override
-    public void savePaymentTransaction(PaymentTransaction paymentTransaction) throws SQLException {
+    public void savePaymentTransaction(IPaymentTransaction paymentTransaction) throws SQLException {
         PaymentInfo paymentInfo = new PaymentInfo(
                 paymentTransaction.getTransactionId(),
                 null,

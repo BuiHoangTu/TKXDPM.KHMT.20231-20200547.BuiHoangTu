@@ -1,10 +1,10 @@
-package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay;
+package hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay;
 
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IBank;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.IInvoice;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IPaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay.PayView;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay.views.pay.PayView;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
@@ -16,7 +16,7 @@ import java.util.*;
 
 public class VnPay implements IBank {
     @Override
-    public PaymentTransaction makePaymentTransaction(
+    public IPaymentTransaction makePaymentTransaction(
             IInvoice invoice,
             String contents
     ) throws
@@ -31,7 +31,7 @@ public class VnPay implements IBank {
         var payView = new PayView(payUrl);
 
         // this show and wait till close
-        PaymentTransaction paymentTransaction = payView.showThenGetPaymentTransaction();
+        IPaymentTransaction paymentTransaction = payView.showThenGetPaymentTransaction();
 
         if (paymentTransaction == null) throw new TransactionNotDoneException();
 

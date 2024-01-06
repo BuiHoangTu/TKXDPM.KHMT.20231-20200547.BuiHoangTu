@@ -1,7 +1,8 @@
-package hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.views.pay;
+package hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay.views.pay;
 
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPayConfig;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IPaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay.models.PaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay.VnPayConfig;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PayView {
-    private PaymentTransaction transaction = null;
+    private IPaymentTransaction transaction = null;
     private final Stage vnPayStage;
 
     public PayView(String payUrl) {
@@ -71,7 +72,7 @@ public class PayView {
         });
     }
 
-    public PaymentTransaction showThenGetPaymentTransaction() {
+    public IPaymentTransaction showThenGetPaymentTransaction() {
         vnPayStage.showAndWait();
         return this.transaction;
     }

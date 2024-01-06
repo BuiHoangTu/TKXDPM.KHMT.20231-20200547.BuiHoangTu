@@ -1,10 +1,9 @@
 package hust.mssv20200547.pttkhtaims.subsystem.bank;
 
 import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
 
 public interface IBank {
-    PaymentTransaction makePaymentTransaction(
+    IPaymentTransaction makePaymentTransaction(
             IInvoice invoice,
             String contents
     ) throws

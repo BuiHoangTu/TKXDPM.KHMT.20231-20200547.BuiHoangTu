@@ -4,9 +4,9 @@ import hust.mssv20200547.pttkhtaims.models.Invoice;
 import hust.mssv20200547.pttkhtaims.models.Order;
 import hust.mssv20200547.pttkhtaims.services.IPayOrderService;
 import hust.mssv20200547.pttkhtaims.services.PayOrderService;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IPaymentTransaction;
 import hust.mssv20200547.pttkhtaims.subsystem.bank.exceptions.pay.*;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
-import hust.mssv20200547.pttkhtaims.subsystem.bank.vnpay.VnPay;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.implement.vnpay.VnPay;
 import hust.mssv20200547.pttkhtaims.views.MediaInVerticalView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -92,7 +92,7 @@ public class InvoiceController implements Initializable {
         var root = this.labelAddress.getScene().getRoot();
         root.setDisable(true);
         try {
-            PaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
+            IPaymentTransaction res = new VnPay().makePaymentTransaction(invoice, "Pay for AIMS");
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success");

@@ -1,6 +1,6 @@
 package hust.mssv20200547.pttkhtaims.services;
 
-import hust.mssv20200547.pttkhtaims.subsystem.bank.models.PaymentTransaction;
+import hust.mssv20200547.pttkhtaims.subsystem.bank.IPaymentTransaction;
 
 import java.sql.SQLException;
 
@@ -10,5 +10,5 @@ public interface IPayOrderService {
     boolean validateCardExpirationDate(String expirationDate);
     boolean validateCardSecurityCode(String securityCode);
 
-    void savePaymentTransaction(PaymentTransaction paymentTransaction) throws SQLException;
+    void savePaymentTransaction(IPaymentTransaction paymentTransaction) throws SQLException;
 }
