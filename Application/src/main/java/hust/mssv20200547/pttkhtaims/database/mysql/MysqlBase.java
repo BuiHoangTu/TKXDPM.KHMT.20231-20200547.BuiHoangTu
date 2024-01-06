@@ -7,9 +7,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public abstract class MysqlBase implements ISql {
-    private static final Connection CONNECTION;
+    private static Connection CONNECTION;
 
-    static {
+    private static void createConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             CONNECTION = DriverManager.getConnection("jdbc:mysql://localhost:3306/personalaims", "personal_aims", "personal_aims");
@@ -18,7 +18,16 @@ public abstract class MysqlBase implements ISql {
         }
     }
 
-    public Connection getConnection() throws SQLException {
+    @Override
+    public Connection getConnection() {
+        boolean connectNotAvailable;
+        try {
+            connectNotAvailable = CONNECTION == null || CONNECTION.isClosed();
+        } catch (SQLException e) {
+            connectNotAvailable = true;
+        }
+
+        if (connectNotAvailable) createConnection();
         return CONNECTION;
     }
 }
