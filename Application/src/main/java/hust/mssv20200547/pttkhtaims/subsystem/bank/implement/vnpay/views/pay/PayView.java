@@ -63,12 +63,12 @@ public class PayView {
                 LocalDateTime createdDateTime = LocalDateTime.parse(createdAt, dateFormat);
 
                 this.transaction = new PaymentTransaction(errorCode, transactionId, transactionContent, amount, createdDateTime);
-
-                vnPayStage.close();
             } catch (URISyntaxException | DateTimeParseException e) {
                 // shouldnt have error
                 System.out.println(e.toString());
             }
+
+            vnPayStage.close();
         });
     }
 
